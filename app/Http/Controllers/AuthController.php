@@ -35,11 +35,11 @@ class AuthController extends Controller
     //get timeline by screen_name
     public function timeline($id)
     {
-    
-        $data = Twitter::getUserTimeline(['count' => 10, 'format' => 'array']);
+
+
         $tweets= Twitter::getUserTimeline(['screen_name' => $id, 'count' => 10, 'format' => 'array']);
-        // return $data;
-        return view('home',compact('data','tweets'));
+        $followerResult=Follower::where('user_id',Auth::user()->id)->get();
+        return view('home',compact('followerResult','tweets'));
     }
 
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
             'twitter_id' => $twitterUser->id,
             'avatar' => $twitterUser->avatar_original,
         ]);
-        $followers = Twitter::getFollowers(['screen_name'=>$twitterUser,'format'=>'array']);
+        $followers = Twitter::getFollowers(['screen_name'=>$newUser->handle,'format'=>'array']);
 
         foreach ($followers['users'] as $follower) {
 
@@ -67,10 +67,7 @@ class AuthController extends Controller
                     'screen_name'=>$follower['screen_name'],
                 ]);
         }
-        // }
 
-
-        //$this->getFollowers($newUser);
         return $newUser;
     }
 

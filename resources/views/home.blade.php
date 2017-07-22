@@ -30,7 +30,7 @@ hr{
 </style>
 </head>
 <body>
-    <div class="flex-center position-ref full-height ">
+    <div class="flex-center position-ref full-height row">
 
 
         <div class="content">
@@ -44,9 +44,9 @@ hr{
 
 
 
-        <div class="container mydivs">
+        <div class="col-md-offset-3 col-md-6 col-md-offset-3 mydivs">
 
-            <div class=" container">
+            <div class=" col-md--offset-3 col-md-6 col-md-offset-3">
                 @if(!empty($tweets))
                 @foreach($tweets as $key => $value)
                 <div class=" mySlides">
@@ -78,7 +78,7 @@ hr{
         </div>
         <div class="row">
 
-            <div class=" container ">
+            <div class=" col-md-offset-3 col-md-6 col-md-offset-3 ">
                 <div class="flex margin-top">
 
 
@@ -91,8 +91,8 @@ hr{
 
                     </div>
                 </div>
-                <div class="followers flex container" id="output">
-
+                <div class="followers flex " id="output">
+                    
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@ function showDivs(n) {
     }
     x[slideIndex-1].style.display = "block";
 }
-
+//Ajax
 function searchFollowers(){
 
         var val=$('#followername');
@@ -134,7 +134,7 @@ function searchFollowers(){
             url:"/searchFollowers",
             data:val,
             success:function(data){
-                // alert(data);
+                console.log(data);
                 $('#output').html(data);
             }
         });

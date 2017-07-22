@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,12 @@ Route::get('home/{id}', 'AuthController@timeline')->name('home');
 
 Route::POST('searchFollowers',function(){
     if(Request::ajax()){
-         return (request('search'));
+        $followerName=request('search');
+        $followerResult=App\Follower::where('name','like',"%$followerName%")
+        ->where('user_id',Auth::user()->id)
+        ->get();
+        
+        return view('followerlist',compact(['followerResult']));
+
     }
 });
