@@ -25,7 +25,7 @@ Route::POST('searchFollowers',function(){
         $followerResult=App\Follower::where('name','like',"%$followerName%")
         ->where('user_id',Auth::user()->id)
         ->get();
-        
+
         return view('followerlist',compact(['followerResult']));
 
     }

@@ -43,23 +43,35 @@ hr{
         </div>
 
 
+        <div class="row">
 
-        <div class="col-md-offset-3 col-md-6 col-md-offset-3 mydivs">
 
-            <div class=" col-md--offset-3 col-md-6 col-md-offset-3">
+        <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs">
+
+            <div class=" ">
                 @if(!empty($tweets))
                 @foreach($tweets as $key => $value)
                 <div class=" mySlides">
 
                     <div class="">
-                        <h4>{{ ++$key }}</h4>
-                        <hr>
-                        <h3>{{ $value['text'] }}</h3>
-                        @if(!empty($value['extended_entities']['media']))
-                        @foreach($value['extended_entities']['media'] as $v)
-                        <img src="{{ $v['media_url_https'] }}" style="width:300px;">
-                        @endforeach
-                        @endif
+                        <div>
+                            <div >
+                            <p class="pull-left">{{ ++$key }} </p>
+                            </div>
+                            <div style="margin-left:45%">
+                                <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
+                                <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
+                            </div>
+                        </div>
+                        <div style="padding:2% 5% 5% 5%">
+                            <hr>
+                            <h3>{{ $value['text'] }}</h3>
+                            @if(!empty($value['extended_entities']['media']))
+                            @foreach($value['extended_entities']['media'] as $v)
+                            <img src="{{ $v['media_url_https'] }}" style="width:300px;">
+                            @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -70,11 +82,9 @@ hr{
 
                 </div>
                 @endif
-                <div  class="margin-top flex" >
-                    <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
-                </div>
+
             </div>
+        </div>
         </div>
         <div class="row">
 
@@ -92,7 +102,7 @@ hr{
                     </div>
                 </div>
                 <div class="followers flex " id="output">
-                    
+
                 </div>
             </div>
         </div>
@@ -106,6 +116,7 @@ $.ajaxSetup({
 });
 
 
+
 var slideIndex = 1;
 showDivs(slideIndex);
 
@@ -114,16 +125,20 @@ function plusDivs(n) {
 }
 
 function showDivs(n) {
+
     var i;
     var x = document.getElementsByClassName("mySlides");
     if (n > x.length) {slideIndex = 1}
     if (n < 1) {slideIndex = x.length}
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
+        // $(x[i]).hide();
     }
     x[slideIndex-1].style.display = "block";
+    // $(x[slideIndex-1]).show(500);
 }
-//Ajax
+setInterval(function(){plusDivs(1);},2000);
+//Ajax Call for follower search
 function searchFollowers(){
 
         var val=$('#followername');
@@ -138,8 +153,6 @@ function searchFollowers(){
                 $('#output').html(data);
             }
         });
-
-
 
 }
 
