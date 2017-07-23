@@ -32,15 +32,6 @@ class AuthController extends Controller
         return redirect("/home/$authUser->handle");
     }
 
-    //get timeline by screen_name
-    public function timeline($id)
-    {
-
-
-        $tweets= Twitter::getUserTimeline(['screen_name' => $id, 'count' => 10, 'format' => 'array']);
-        $followerResult=Follower::where('user_id',Auth::user()->id)->get();
-        return view('home',compact('followerResult','tweets'));
-    }
 
 
     public function findUser($twitterUser){
@@ -70,8 +61,5 @@ class AuthController extends Controller
 
         return $newUser;
     }
-
-
-
 
 }

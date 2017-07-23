@@ -17,11 +17,10 @@ Route::get('/', function () {
 
 Route::get('/auth','AuthController@provider');
 Route::get('/callback/twitter','AuthController@callback');
-Route::get('home/{id}', 'AuthController@timeline')->name('home');
+Route::get('home/{id}', 'TwitterController@timeline')->name('home');
 // Route::post('sendPDF', 'SendTweets@send');
-Route::post('sendPDF',function(){
-    return $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->id, 'count' => 10, 'format' => 'array']);
-});
+// Route::get('sendPDF','TwitterController@send');
+Route::post('sendPDF','TwitterController@sendMail');
 
 Route::POST('searchFollowers',function(){
     if(Request::ajax()){
