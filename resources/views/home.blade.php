@@ -3,10 +3,10 @@
 
 <title>twitter App</title>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <style >
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style >
 .mydivs{
     padding: 10px;
     border: 1px solid #0084b4;
@@ -30,7 +30,7 @@ hr{
 </style>
 </head>
 <body>
-    <div class="flex-center position-ref full-height row">
+    <div class=" row">
 
 
         <div class="content">
@@ -45,46 +45,50 @@ hr{
 
         <div class="row">
 
+            <div class="text-center" style="margin-bottom:1%">
 
-        <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs">
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Email</button>
+            </div>
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs">
 
-            <div class=" ">
-                @if(!empty($tweets))
-                @foreach($tweets as $key => $value)
-                <div class=" mySlides">
+                <div class=" ">
+                    @if(!empty($tweets))
+                    @foreach($tweets as $key => $value)
+                    <div class=" mySlides">
 
-                    <div class="">
-                        <div>
-                            <div >
-                            <p class="pull-left">{{ ++$key }} </p>
+                        <div class="">
+                            <div>
+                                <div >
+                                    <p class="pull-left">{{ ++$key }} </p>
+                                </div>
+                                <div style="margin-left:45%">
+                                    <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
+                                    <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
+                                </div>
                             </div>
-                            <div style="margin-left:45%">
-                                <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
-                                <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
+                            <div style="padding:2% 5% 5% 5%">
+                                <hr>
+                                <h3>{{ $value['text'] }}</h3>
+                                @if(!empty($value['extended_entities']['media']))
+                                @foreach($value['extended_entities']['media'] as $v)
+                                <img src="{{ $v['media_url_https'] }}" style="width:300px;">
+                                @endforeach
+                                @endif
                             </div>
-                        </div>
-                        <div style="padding:2% 5% 5% 5%">
-                            <hr>
-                            <h3>{{ $value['text'] }}</h3>
-                            @if(!empty($value['extended_entities']['media']))
-                            @foreach($value['extended_entities']['media'] as $v)
-                            <img src="{{ $v['media_url_https'] }}" style="width:300px;">
-                            @endforeach
-                            @endif
                         </div>
                     </div>
+                    @endforeach
+                    @else
+                    <div class=" mySlides">
+
+                        <h3>No Tweets</h3>
+
+                    </div>
+                    @endif
+
                 </div>
-                @endforeach
-                @else
-                <div class=" mySlides">
-
-                    <h3>No Tweets</h3>
-
-                </div>
-                @endif
-
             </div>
-        </div>
         </div>
         <div class="row">
 
@@ -104,6 +108,31 @@ hr{
                 <div class="followers flex " id="output">
 
                 </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form class="" action="/sendPDF" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Email</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            <input type="email" class="form-control" name="email" value="" placeholder="Enter Email Address" required>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="send" class="btn btn-primary">Go</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
@@ -141,18 +170,18 @@ setInterval(function(){plusDivs(1);},2000);
 //Ajax Call for follower search
 function searchFollowers(){
 
-        var val=$('#followername');
-        // alert(val);
+    var val=$('#followername');
+    // alert(val);
 
-        $.ajax({
-            type:"POST",
-            url:"/searchFollowers",
-            data:val,
-            success:function(data){
-                console.log(data);
-                $('#output').html(data);
-            }
-        });
+    $.ajax({
+        type:"POST",
+        url:"/searchFollowers",
+        data:val,
+        success:function(data){
+            console.log(data);
+            $('#output').html(data);
+        }
+    });
 
 }
 
