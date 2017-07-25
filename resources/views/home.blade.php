@@ -50,7 +50,7 @@ hr{
                 <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Email</button>
             </div>
-            <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs">
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs" id="slider">
 
                 <div class=" ">
                     @if(!empty($tweets))

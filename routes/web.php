@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,4 +33,16 @@ Route::POST('searchFollowers',function(){
         return view('followerlist',compact(['followerResult']));
 
     }
+});
+
+Route::get('changeSlider',function(){
+    if(Request::ajax()){
+
+        $tweets= \Twitter::getUserTimeline(['screen_name' => request('handle'), 'count' => 10, 'format' => 'array']);
+        return view('slider',compact('tweets'));
+    }
+});
+
+Route::get('/tw',function(){
+    return $tweets= Twitter::getUserTimeline(['screen_name' => 'sagarnasit', 'count' => 10, 'format' => 'array']);
 });
