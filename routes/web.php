@@ -37,9 +37,9 @@ Route::POST('searchFollowers',function(){
 
 Route::get('changeSlider',function(){
     if(Request::ajax()){
-
+        
         $tweets= \Twitter::getUserTimeline(['screen_name' => request('handle'), 'count' => 10, 'format' => 'array']);
-        return view('slider',compact('tweets'));
+        return view('slider',compact(['tweets','handle']));
     }
 });
 

@@ -1,17 +1,26 @@
 <!doctype html>
 <html>
 
-<title>twitter App</title>
+<title>Twitter App</title>
+<link rel="icon" href="/images/logo.png">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    .pointer:hover{
+        cursor: pointer;
+    }
+</style>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style >
+
 .mydivs{
     padding: 10px;
     border: 1px solid #0084b4;
     border-radius: 5px;
     box-shadow: 10px 10px 20px #c0deed;
+    height: 400px;
+    overflow: auto;
 }
 hr{
     border-style: inset;
@@ -34,9 +43,10 @@ hr{
 
 
         <div class="content">
-            <div class="title m-b-md" align='center' style="margin-top:50px" >
-                <h3>Welcome {{ Auth::user()->name }}</h3>
-                <h3>Twitter Handle: {{ Auth::user()->handle }}</h3>
+            <div class="title " align='center' style="margin-top:50px" >
+                <img src="/images/logo.png" alt="" class="img img-responsive" width="10%">
+                <h3>Welcome: {{ Auth::user()->name }}</h3>
+                <h3>Twitter Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
             </div>
 
 
@@ -45,12 +55,12 @@ hr{
 
         <div class="row">
 
-            <div class="text-center" style="margin-bottom:1%">
+            <div class="text-center" style="margin:1% 0 1% 0">
 
                 <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Email</button>
+                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Email</button>
             </div>
-            <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-0 col-sm-12 col-sm-offset-0 mydivs" id="slider">
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-2 col-sm-8 col-sm-offset-2  mydivs" id="slider">
 
                 <div class=" ">
                     @if(!empty($tweets))
@@ -89,27 +99,45 @@ hr{
 
                 </div>
             </div>
+
         </div>
-        <div class="row">
+        <div class="">
+            <div class="col-md-offset-3 col-md-6 margin-top" >
 
-            <div class=" col-md-offset-3 col-md-6 col-md-offset-3 ">
-                <div class="flex margin-top">
+                <div class="">
+                    <div class="flex ">
 
 
-                    <div class="form-group">
-                        <form class="" action="#" id="myForm" method="POST" name="followersForm">
-                            {{ csrf_field() }}
+                        <div class="form-group">
+                            <form class="" action="#" id="myForm" method="POST" name="followersForm">
+                                {{ csrf_field() }}
 
-                            <input type="text" name="search" placeholder="Search Followers..." id="followername" class="form-control input-lg" oninput="searchFollowers()">
-                        </form>
+                                <input type="text" name="search" placeholder="Search Followers..." id="followername" class="form-control input-lg" oninput="searchFollowers()">
+                            </form>
 
+                        </div>
                     </div>
-                </div>
-                <div class="followers flex " id="output">
-
+                    <div class="followers flex " id="output" style="overflow:auto;height:400px">
+                        <table class="table table-responsive table-striped table-hover table-border table-bordered">
+                            @if(isset($followerResult))
+                                @foreach($followerResult as $follower)
+                                    <tr>
+                                        <td class="text-uppercase text-center pointer" onclick='getFollowerTweets("{{$follower->screen_name}}")' >
+                                            <p href='{{ url("home/$follower->screen_name") }}'  >{{$follower->name}}</p>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td>Not Found</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -166,7 +194,7 @@ function showDivs(n) {
     x[slideIndex-1].style.display = "block";
     // $(x[slideIndex-1]).show(500);
 }
-setInterval(function(){plusDivs(1);},2000);
+setInterval(function(){plusDivs(1);},3000);
 //Ajax Call for follower search
 function searchFollowers(){
 
@@ -184,6 +212,24 @@ function searchFollowers(){
     });
 
 }
+
+function getFollowerTweets(handle){
+
+    var val=handle;
+    // alert(val);
+
+    $.ajax({
+        type:"GET",
+        url:"/changeSlider?handle="+val,
+        data:val,
+        success:function(data){
+            // alert(data);
+            $('#slider').html(data);
+        }
+    });
+
+}
+
 
 </script>
 

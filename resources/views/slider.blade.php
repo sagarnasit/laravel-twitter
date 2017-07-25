@@ -12,6 +12,9 @@
                     <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                     <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                 </div>
+                <div class="">
+                    
+                </div>
             </div>
             <div style="padding:2% 5% 5% 5%">
                 <hr>
@@ -32,5 +35,9 @@
 
     </div>
     @endif
-    
+
 </div>
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+</script>
