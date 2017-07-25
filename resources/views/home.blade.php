@@ -39,14 +39,14 @@ hr{
 </style>
 </head>
 <body>
-    <div class=" row">
+    <div class="container">
 
 
         <div class="content">
             <div class="title " align='center' style="margin-top:50px" >
-                <img src="/images/logo.png" alt="" class="img img-responsive" width="10%">
+                <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive" width="10%">
                 <h3>Welcome: {{ Auth::user()->name }}</h3>
-                <h3>Twitter Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
+                <h3>Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
             </div>
 
 
@@ -101,7 +101,7 @@ hr{
             </div>
 
         </div>
-        <div class="">
+        <div class="row">
             <div class="col-md-offset-3 col-md-6 margin-top" >
 
                 <div class="">
