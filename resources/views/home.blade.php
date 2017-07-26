@@ -5,6 +5,7 @@
 <link rel="icon" href="/images/logo.png">
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <style>
     .pointer:hover{
         cursor: pointer;
@@ -163,7 +164,41 @@ hr{
 
             </div>
         </div>
-    </div>
+        <!-- Done Model -->
+        <div id="myDoneModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="padding:0%">
+
+                    <div class="modal-content" style="padding:%">
+
+                        <div style="margin-top:%">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div align="center" style="margin-top:5%">
+                            <i class="fa fa-check-circle" style="color:#33cc33;font-size:50px;"></i>
+                        </div>
+
+                        <div align="center" style="margin:3% 0 5% 0">
+                            <strong>Sent Successfully</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @if(request()->session()->has('status'))
+            <script>
+                $(window).on('load',function(){
+                        $('#myDoneModal').modal('show');
+                    });
+
+            </script>
+        @endif
 </body>
 <script>
 $.ajaxSetup({
@@ -230,7 +265,5 @@ function getFollowerTweets(handle){
 
 }
 
-
 </script>
-
 </html>
