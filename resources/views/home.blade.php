@@ -3,15 +3,20 @@
 
 <title>Twitter App</title>
 <link rel="icon" href="/images/logo.png">
+<!-- csrf for ajax -->
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<!-- bootsratp css file -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- bootstrap font-awesome css -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <style>
     .pointer:hover{
         cursor: pointer;
     }
 </style>
+<!-- jQuery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <!-- bootstrap js -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style >
 
@@ -42,18 +47,18 @@ hr{
 <body>
     <div class="container">
 
-
-        <div class="content">
-            <div class="title " align='center' style="margin-top:50px" >
+         <!-- Display User Profile pic, name and handle  -->
+        <div class="userInfo content">
+            <div class="title " align='center' style="margin-top:5%" >
                 <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive" width="10%">
                 <h3>Welcome: {{ Auth::user()->name }}</h3>
                 <h3>Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
             </div>
 
-
         </div>
-
-
+         <!-- end userInfo  -->
+        
+         <!-- Slider  -->
         <div class="row">
 
             <div class="text-center" style="margin:1% 0 1% 0">
@@ -64,64 +69,71 @@ hr{
             <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-2 col-sm-8 col-sm-offset-2  mydivs" id="slider">
 
                 <div class=" ">
+                     <!-- display if any tweets  -->
                     @if(!empty($tweets))
-                    @foreach($tweets as $key => $value)
-                    <div class=" mySlides">
+                        @foreach($tweets as $key => $value)
+                            <div class=" mySlides">
 
-                        <div class="">
-                            <div>
-                                <div >
-                                    <p class="pull-left">{{ ++$key }} </p>
-                                </div>
-                                <div style="margin-left:45%">
-                                    <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
-                                    <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
+                                <div class="">
+                                    <div>
+                                        <div >
+                                            <p class="pull-left">{{ ++$key }} </p>
+                                        </div>
+                                        <div style="margin-left:43%">
+                                            <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
+                                            <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
+                                        </div>
+                                    </div>
+                                    <div style="padding:2% 5% 5% 5%">
+                                        <hr>
+                                        <h3>{{ $value['text'] }}</h3><!-- diplay tweet  -->
+                                        @if(!empty($value['extended_entities']['media']))
+                                            @foreach($value['extended_entities']['media'] as $v)
+                                            <!--  display meadia if any  -->
+                                                <img src="{{ $v['media_url_https'] }}" style="width:300px;">
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <div style="padding:2% 5% 5% 5%">
-                                <hr>
-                                <h3>{{ $value['text'] }}</h3>
-                                @if(!empty($value['extended_entities']['media']))
-                                @foreach($value['extended_entities']['media'] as $v)
-                                <img src="{{ $v['media_url_https'] }}" style="width:300px;">
-                                @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                        @endforeach
+                     <!-- display No Tweets msg if not  -->
                     @else
-                    <div class=" mySlides">
+                        <div class=" mySlides">
 
-                        <h3>No Tweets</h3>
+                            <h3>No Tweets</h3>
 
-                    </div>
+                        </div>
                     @endif
 
                 </div>
             </div>
-
         </div>
+         <!-- End Slider  -->
+
+         <!-- Search and display follower list  -->
         <div class="row">
             <div class="col-md-offset-3 col-md-6 margin-top" >
 
                 <div class="">
                     <div class="flex ">
 
-
+                        <!-- Follower search box -->
                         <div class="form-group">
                             <form class="" action="#" id="myForm" method="POST" name="followersForm">
                                 {{ csrf_field() }}
-
+                    
                                 <input type="text" name="search" placeholder="Search Followers..." id="followername" class="form-control input-lg" oninput="searchFollowers()">
                             </form>
 
                         </div>
                     </div>
+
+                    <!-- display follower list -->
                     <div class="followers flex " id="output" style="overflow:auto;height:400px">
                         <table class="table table-responsive table-striped table-hover table-border table-bordered">
-                            @if(isset($followerResult))
-                                @foreach($followerResult as $follower)
+                            @if(isset($followers))
+                                @foreach($followers as $follower)
                                     <tr>
                                         <td class="text-uppercase text-center pointer" onclick='getFollowerTweets("{{$follower->screen_name}}")' >
                                             <p href='{{ url("home/$follower->screen_name") }}'  >{{$follower->name}}</p>
@@ -135,11 +147,12 @@ hr{
                             @endif
                         </table>
                     </div>
+                    <!-- end follower list -->
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
+        <!--  end follower list  -->
+        <!-- Bootstrap popup for Email  -->
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -165,6 +178,8 @@ hr{
             </div>
         </div>
         <!-- Done Model -->
+
+        <!-- Bootstrap Popup to show sucessfull msg -->
         <div id="myDoneModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -190,7 +205,9 @@ hr{
                 </div>
             </div>
         </div>
+        <!-- end model -->
 
+        <!-- show successfull popup msg -->
         @if(request()->session()->has('status'))
             <script>
                 $(window).on('load',function(){
@@ -201,64 +218,86 @@ hr{
         @endif
 </body>
 <script>
+
+// ajax setup for laravel
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
+</script>
+<script type="text/javascript">
+// slider javasript using jquery
 
-
+// Display First Tweet
 var slideIndex = 1;
 showDivs(slideIndex);
 
+
+//Call function to change slide
 function plusDivs(n) {
     showDivs(slideIndex += n);
 }
 
+//funcion to change slide
 function showDivs(n) {
 
     var i;
+    //get All slides
     var x = document.getElementsByClassName("mySlides");
-    if (n > x.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = x.length}
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-        // $(x[i]).hide();
-    }
-    x[slideIndex-1].style.display = "block";
-    // $(x[slideIndex-1]).show(500);
-}
-setInterval(function(){plusDivs(1);},3000);
-//Ajax Call for follower search
-function searchFollowers(){
 
+
+    if (n > x.length) {
+        slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = x.length
+    }
+    //hide all slides
+    for (i = 0; i < x.length; i++) {
+        // x[i].style.display = "none";
+        $(x[i]).hide();
+    }
+    // show next sslide
+     $(x[slideIndex-1]).show();
+}
+//interval for changing slide
+setInterval(function(){plusDivs(1);},5000);
+
+</script>
+<script type="text/javascript">
+//function Call for follower search on every key stroke
+function searchFollowers(){
+    //get follower name
     var val=$('#followername');
     // alert(val);
 
+    //Ajax call
     $.ajax({
         type:"POST",
         url:"/searchFollowers",
         data:val,
         success:function(data){
-            console.log(data);
+            
+            // load data in HTML
             $('#output').html(data);
         }
     });
 
 }
-
+//Function call to get Tweets of clicked follower
 function getFollowerTweets(handle){
-
+    //get clicked follower
     var val=handle;
-    // alert(val);
-
+    
+    //Ajax call to retrive tweets
     $.ajax({
         type:"GET",
         url:"/changeSlider?handle="+val,
         data:val,
         success:function(data){
-            // alert(data);
+            // load data in HTML slider
             $('#slider').html(data);
         }
     });

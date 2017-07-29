@@ -1,3 +1,4 @@
+<!-- Html page which will be send as a PDF File -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,15 +15,19 @@
         <div align='center'>
             <h3>Tweets Form Your Twitter Account</h3>
         </div>
+        <!-- twitter logo -->
         <div align='center'>
             <img src="images/logo.png" alt="" width="150px">
         </div>
+
+        <!-- display name and handle -->
         <div align='center'>
             <h5>Name: {{Auth::user()->name}}</h5>
             <h5 >Handle: <strong>@</strong>{{ Auth::user()->handle}}
             </h5>
 
         </div>
+        <!-- display each tweets -->
         <div class="">
             @if(!empty($tweets))
             @foreach($tweets as $key => $value)
@@ -35,12 +40,14 @@
                         </div>
 
                     </div>
+                    <!-- Tweet -->
                     <div >
                         <hr style="border:0.2px 0 0 0 solid black">
                         <p>{{ $value['text'] }}</p>
                         @if(!empty($value['extended_entities']['media']))
                         @foreach($value['extended_entities']['media'] as $v)
-                        <img src="{{ $v['media_url_https'] }}" style="width:300px;">
+                        <!-- media attached with tewwts -->
+                        <img src="{{ $v['media_url_https'] }}" style="width:150px;">
                         @endforeach
                         @endif
                     </div>

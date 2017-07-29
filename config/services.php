@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
         'twitter' => [
-        'client_id' => 'qUeTNmoNa1rrH3HjEx1F64vDk',
-        'client_secret' => 'Z4Q1BrwWnGl8xafEH7nsVjoONfOoE0AmtykxzXvaar6NiQVrwr',
-        'redirect' => 'http://localhost:8000/callback/twitter',
+        'client_id' => 'RTiIHgMBqGmyXWQqzRZ0cCcIz',
+        'client_secret' => 'eBnCUSSZcDS1ETUn73y2VO3aikBhVwuGP6yJKElRcGHZmuTnE2',
+        'redirect' => 'http://localhost:8000/callback',
     ],
 
 ];

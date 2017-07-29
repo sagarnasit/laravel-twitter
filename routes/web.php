@@ -1,55 +1,54 @@
     <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-//Root Route
+
+//return login response if user isn't authenticated
 Route::get('/', function () {
     return view('welcome');
-})->name('login');
+})->name('login')->middleware(['guest']);
 
-//Authentication by Twitter
+//redirect user to Authenticat by his twitter credentials
 Route::get('/auth','AuthController@provider');
 
-//return here if successfully authenticate
-Route::get('/callback/twitter','AuthController@callback');
+//redirect user to this route if user successfully authenticate by Twitter
+Route::get('/callback','AuthController@callback');
 
+
+//All Routes inside group will be checked for user's authentication by 'auth' midlewware
 Route::group(['middleware'=>['auth']],function(){
-    //Return to this route to display slider and follower
-    Route::get('home/{id}', 'TwitterController@timeline')->name('home');
+    
+    //Return 10 Tweets and 10 Followers of logged in user
+    Route::get('home', 'TwitterController@timeline')->name('home');
 
-    //Send Tweets PDF to Given Email
+    //Send PDF of user's tweets to his email
     Route::post('sendPDF','TwitterController@sendMail');
 
-    //Ajax route call for Follower Search
+    //Ajax call for searching Followers
     Route::POST('searchFollowers',function(){
         if(Request::ajax()){
+            
             //get searched name
             $followerName=request('search');
-            //Find Matching Names of Follower
-            $followerResult=App\Follower::where('name','like',"%$followerName%")
-            ->where('user_id',Auth::user()->id)
-            ->get();
-            //Return List of matching Followers
-            return view('followerlist',compact(['followerResult']));
+
+            //Find Matching Names of Follower inside follower table
+            $followers=App\Follower::where('name','like',"%$followerName%")
+                ->where('user_id',Auth::user()->id)
+                ->get();
+
+            //Return List of matched Followers
+            return view('followerList',compact(['followers']));
 
         }
     });
 
-    //Ajax Route call for tweets slider of a Follower
+    //Ajax call for tweets slider of a Follower
     Route::get('changeSlider',function(){
         if(Request::ajax()){
+            
             //Get 10 Tweets Of Clicked Follower
             $tweets= \Twitter::getUserTimeline(['screen_name' => request('handle'), 'count' => 10, 'format' => 'array']);
-            //return new slider with tweets of clicked Follower
+
+            //return new slider with 10 tweets of clicked Follower
             return view('slider',compact(['tweets','handle']));
         }
     });

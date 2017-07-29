@@ -12,36 +12,50 @@ use Mail;
 use PDF;
 class TwitterController extends Controller
 {
-    //get timeline by screen_name
-    public function timeline($id)
+    /**
+     * timeline get 10 tweets and 10 followers from  logged in user 
+     * @return it returns response with tweets slider and follower list
+     */
+    public function timeline()
     {
 
-        $tweets= Twitter::getUserTimeline(['screen_name' => $id, 'count' => 10, 'format' => 'array']);
-        $followerResult=Follower::where('user_id',Auth::user()->id)->limit(10)->get();
+        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->screen_name, 'count' => 10, 'format' => 'array']);
+        $followers=Follower::where('user_id',Auth::user()->id)->limit(10)->get();
 
-        return view('home',compact('followerResult','tweets'));
+        return view('home',compact('followers','tweets'));
     }
 
-    public function send(){
-        return $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle ,'count'=>3200 ,'format' => 'array']);
-    }
 
+    /**
+     * sendMail retrive tweets of logged in user and generate pdf of tweets
+     * @return it will return response privious view with 'successfull' message
+     */
     public function sendMail(){
 
         $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle ,'count'=>3200 ,'format' => 'array']);
         $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
 
-        // return $pdf->stream('pdf.pdf');
+        $this->send($tweets,$pdf);
+        request()->session()->flash('status','Mail Sent');
+        return back();
+    }
+
+    /**
+     * this function send pdf attachment of tweets to the email provided by user
+     * @param  $tweets array of tweets
+     * @param  $pdf    pdf view of tweets
+     * @return void
+     */
+    public function send($tweets,$pdf){
         Mail::send('mail', $tweets, function($message) use($pdf)
         {
-            $message->from('saaagarnasit@gmail.com', 'Sagar');
+            $message->from('saaagarnasit@gmail.com', 'Sagar Nasit');
 
             $message->to(request('email'))->subject('Tweets');
 
             $message->attachData($pdf->output(), "tweets.pdf");
         });
-        request()->session()->flash('status','Mail Sent');
-        return back();
+        return;
     }
 
 }
