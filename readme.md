@@ -23,15 +23,34 @@ This is Laravel Application with expressive, elegant syntax which can allow user
 - User can also get his tweets by clicking Email button above the slider.
 - Email button will ask for email address on which user want to receive his/her Tweets as PDF file.
 
-##System Requirenments
+## System Requirenments
+- PHP >= 5.6.4
+    - OpenSSL PHP Extension
+    - PDO PHP Extension
+    - Mbstring PHP Extension
+    - Tokenizer PHP Extension
+    - XML PHP Extension
+- Mysql
+- Composer (https://getcomposer.org/)
+- Git
+For more detail about laravel application requirenments visit <a href="https://laravel.com/docs/5.4/installation#installation">Here</a>
 
-##Install
+## Install
+Use following command to clone application on your machine
+- https://github.com/sagarnasit/Twitter_App.git
 
-##Configuration
+After Completion of clonning give coposer update
+- composer update
+
 
 ##Operating Instruction
 
-##3rd Party Libraries
+## 3rd Party Libraries used in application
+- <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Tweeter
+- <a href="https://github.com/thujohn/twitter">Thujohn/Twitter for fetching tweets and follower detail
+- <a href="http://getbootstrap.com/">Bootstrap</a> for Responsive Design
+- <a href="https://jquery.com/">JQuery</a> For Ajax
+- <a href="http://fontawesome.io/get-started/">Font Awesome</a> For Icons
 
 
 ## License

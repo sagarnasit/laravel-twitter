@@ -8,6 +8,7 @@ use App\User;
 use Socialite;
 use Twitter;
 use App\Follower;
+
 class AuthController extends Controller
 {
     /**
@@ -15,9 +16,9 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function provider(){
+    public function provider()
+    {
         return Socialite::driver('twitter')->redirect();
-
     }
 
     /**
@@ -25,18 +26,17 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function callback(){
-
-        try{
+    public function callback()
+    {
+        try {
             $user=Socialite::driver('twitter')->user();
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return redirect('/auth');
         }
 
         $authUser=$this->findUser($user);
 
-        Auth::login($authUser,true);
+        Auth::login($authUser, true);
         return redirect("/home");
     }
 
@@ -47,10 +47,11 @@ class AuthController extends Controller
      * @param $twitterUser
      * @return User
      */
-    public function findUser($twitterUser){
+    private function findUser($twitterUser)
+    {
         //check user already exist
-        $authUser = User::where('twitter_id',$twitterUser->id)->first();
-        if($authUser){
+        $authUser = User::where('twitter_id', $twitterUser->id)->first();
+        if ($authUser) {
             return $authUser;
         }
         //if not then create a new
@@ -69,19 +70,19 @@ class AuthController extends Controller
      * get followers of new user and insert into database
      * @param   $newUser newly created user information
      * @return  void
-     */ 
-    public function createFollowers($newUser){
+     */
+    private function createFollowers($newUser)
+    {
         $followers = Twitter::getFollowers(['screen_name'=>$newUser->handle,'format'=>'array']);
 
         /**
          * loop through all followers and insert into database
          */
         foreach ($followers['users'] as $follower) {
-
-                    Follower::create([
-                    'user_id'=>$newUser->id,
-                    'name'=>$follower['name'],
-                    'screen_name'=>$follower['screen_name'],
+                Follower::create([
+                    'user_id' => $newUser->id,
+                    'name' => $follower['name'],
+                    'screen_name' => $follower['screen_name'],
                 ]);
         }
         return;
