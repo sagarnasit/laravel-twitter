@@ -44,12 +44,7 @@
                     <div >
                         <hr style="border:0.2px 0 0 0 solid black">
                         <p>{{ $value['text'] }}</p>
-                        @if(!empty($value['extended_entities']['media']))
-                        @foreach($value['extended_entities']['media'] as $v)
-                        <!-- media attached with tewwts -->
-                        <img src="{{ $v['media_url_https'] }}" style="width:150px;">
-                        @endforeach
-                        @endif
+                        
                     </div>
                 </div>
             </div>

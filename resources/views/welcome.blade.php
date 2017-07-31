@@ -23,11 +23,12 @@
 <body>
     <div class="container">
 
-        
+
     <div class="row">
             <div align="center" class="">
                 <img src="/images/logo.png" alt="" class="img img-responsive image" width="20%" style="margin-top:22%">
             </div>
+            
             <!-- button -->
             <div class="col-md-offset-4 col-md-4" align='center'style="margin-top:5" >
                 <a href="/auth" class="btn btn-primary btn-lg btn-block" >Login With Twitter</a>

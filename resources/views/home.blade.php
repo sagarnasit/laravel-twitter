@@ -165,7 +165,7 @@ hr{
                         </div>
                         <div class="modal-body">
                             {{ csrf_field() }}
-                            <input type="email" class="form-control" name="email" value="" placeholder="Enter Email Address" required>
+                            <input type="email" class="form-control" id="email" name="email" value="" placeholder="Enter Email Address" required>
 
                         </div>
                         <div class="modal-footer">

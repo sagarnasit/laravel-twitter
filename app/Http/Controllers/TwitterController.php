@@ -13,13 +13,13 @@ use PDF;
 class TwitterController extends Controller
 {
     /**
-     * timeline get 10 tweets and 10 followers from  logged in user 
+     * timeline get 10 tweets and 10 followers from  logged in user
      * @return it returns response with tweets slider and follower list
      */
     public function timeline()
     {
 
-        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->screen_name, 'count' => 10, 'format' => 'array']);
+        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count' => 10, 'format' => 'array']);
         $followers=Follower::where('user_id',Auth::user()->id)->limit(10)->get();
 
         return view('home',compact('followers','tweets'));
@@ -50,9 +50,7 @@ class TwitterController extends Controller
         Mail::send('mail', $tweets, function($message) use($pdf)
         {
             $message->from('saaagarnasit@gmail.com', 'Sagar Nasit');
-
             $message->to(request('email'))->subject('Tweets');
-
             $message->attachData($pdf->output(), "tweets.pdf");
         });
         return;
