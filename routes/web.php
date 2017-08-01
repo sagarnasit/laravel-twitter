@@ -10,11 +10,11 @@ Route::get('/', function () {
 //redirect user to Authenticate by his twitter credentials
 Route::get('/auth', 'AuthController@provider');
 
-//redirect user to this route if user successfully authenticate by Twitter
+//callback route if user successfully authenticated by Twitter
 Route::get('/callback', 'AuthController@callback');
 
 
-//All Routes inside group will be checked for user's authentication by 'auth' midlewware
+//All Routes inside group will be checked for user's authentication by 'auth' middleware
 Route::group(['middleware'=>['auth']], function () {
     
     //Return 10 Tweets and 10 Followers of logged in user
@@ -23,7 +23,11 @@ Route::group(['middleware'=>['auth']], function () {
     //Send PDF of user's tweets to his email
     Route::post('sendPDF', 'TwitterController@sendMail');
 
+    //Post tweet from user's twitter Account
     Route::post('postTweet', 'TwitterController@postTweet');
+
+    Route::get('logout', 'AuthController@logout');
+
     //Ajax call for searching Followers
     Route::POST('searchFollowers', function () {
         if (Request::ajax()) {

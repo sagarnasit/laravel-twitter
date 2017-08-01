@@ -6,7 +6,7 @@
             <!-- Trigger the modal with a button -->
             <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Email</button>
       </div>
-      <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-sm-offset-2 col-sm-8 col-sm-offset-2  mydivs" id="slider">
+      <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-offset-1 col-xs-10 col-xs-offset-1  mydivs" id="slider">
 
             <div class=" ">
                   <!-- display if any tweets  -->
@@ -19,11 +19,17 @@
                                                 <div >
                                                       <p class="pull-left">{{ ++$key }} </p>
                                                 </div>
-                                                <div style="margin-left:43%">
+                                                <div style="margin-left:43%;float: left">
                                                       <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                                                       <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                                                 </div>
+                                                <div style="">
+                                                      <p class="pull-right">{{ Twitter::ago($value['created_at']) }}</p>
+                                                </div>
+
                                           </div>
+                                          <div style="clear: both"></div>
+
                                           <div style="padding:2% 5% 5% 5%">
                                                 <hr>
                                                 <h3>{{ $value['text'] }}</h3><!-- diplay tweet  -->

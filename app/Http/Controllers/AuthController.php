@@ -22,9 +22,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Obtain the user information from Twitter.
+     * Fetch the user information from Twitter.
      *
-     * @return Response
+     * @return Response to home
      */
     public function callback()
     {
@@ -44,22 +44,22 @@ class AuthController extends Controller
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $twitterUser
-     * @return User
+     * @param $user contain twitter info user(name,handle,prifile photo,twitter id)
+     * @return User info from database
      */
-    private function findUser($twitterUser)
+    private function findUser($user)
     {
         //check user already exist
-        $authUser = User::where('twitter_id', $twitterUser->id)->first();
+        $authUser = User::where('twitter_id', $user->id)->first();
         if ($authUser) {
             return $authUser;
         }
         //if not then create a new
         $newUser= User::create([
-            'name' => $twitterUser->name,
-            'handle' => $twitterUser->nickname,
-            'twitter_id' => $twitterUser->id,
-            'avatar' => $twitterUser->avatar_original,
+            'name' => $user->name,
+            'handle' => $user->nickname,
+            'twitter_id' => $user->id,
+            'avatar' => $user->avatar_original,
         ]);
         //create followers of new user
         $this->createFollowers($newUser);
@@ -86,6 +86,11 @@ class AuthController extends Controller
                 ]);
         }
         return;
+    }
+
+    public function logout(){
+          Auth::logout();
+          return redirect('/');
     }
 
 }

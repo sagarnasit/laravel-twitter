@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Twitter App</title>
 <link rel="icon" href="/images/logo.png">
 <!-- csrf for ajax -->
@@ -51,7 +52,8 @@ hr{
          <!-- Display User Profile pic, name and handle  -->
         <div class="userInfo content">
             <div class="title " align='center' style="margin-top:5%" >
-                <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive" width="10%">
+
+                <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive img-circle" width="170px">
                 <h3>Welcome: {{ Auth::user()->name }}</h3>
                 <h3>Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
             </div>
