@@ -37,7 +37,7 @@ return [
         'twitter' => [
         'client_id' => 'RTiIHgMBqGmyXWQqzRZ0cCcIz',
         'client_secret' => 'eBnCUSSZcDS1ETUn73y2VO3aikBhVwuGP6yJKElRcGHZmuTnE2',
-        'redirect' => 'http://localhost:8000/callback',
+        'redirect' => 'http://0c413150.ngrok.io/callback',
     ],
 
 ];

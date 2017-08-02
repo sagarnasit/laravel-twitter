@@ -19,12 +19,11 @@ class TwitterController extends Controller
      */
     public function getTimeline()
     {
-
         $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count' => 10, 'format' => 'array']);
         $followers= Follower::where('user_id', Auth::user()->id)->limit(10)->get();
-        return view('home', compact('followers', 'tweets', 'email'));
-    }
 
+        return view('home', compact('followers', 'tweets'));
+    }
 
     /**
      * this function retrieve tweets of logged in user and generate pdf of tweets
@@ -51,19 +50,19 @@ class TwitterController extends Controller
     {
         Mail::send('mail', $tweets, function ($message) use ($pdf) {
             $message->from('saaagarnasit@gmail.com', 'Sagar Nasit');
-            $message->to(request('email'))->subject('Tweets');
+            $message->to(trim(request('email')))->subject('Tweets');
             $message->attachData($pdf->output(), "tweets.pdf");
         });
         return;
     }
 
-      /**
-       * this function post tweet from logged in user's twitter account
-       * @return response of successful tweet post
-       */
+    /**
+    * this function post tweet from logged in user's twitter account
+    * @return response of successful tweet post
+    */
     public function postTweet()
     {
-          $tweet=request('tweet');
+          $tweet=trim(request('tweet'));
           Twitter::postTweet(['status' => $tweet, 'format' => 'json']);
           request()->session()->flash('status', 'Tweet Posted');
           return redirect('/home');

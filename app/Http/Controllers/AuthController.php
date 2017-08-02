@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use Psy\Exception\RuntimeException;
 use Socialite;
 use Twitter;
 use App\Follower;
@@ -73,7 +74,8 @@ class AuthController extends Controller
      */
     private function createFollowers($newUser)
     {
-        $followers = Twitter::getFollowers(['screen_name'=>$newUser->handle,'format'=>'array']);
+
+        $followers = Twitter::getFollowers(['screen_name' => $newUser->handle, 'format' => 'array']);
 
         /**
          * loop through all followers and insert into database
@@ -88,7 +90,12 @@ class AuthController extends Controller
         return;
     }
 
-    public function logout(){
+      /**
+       * this function logout user from session
+       * @return response to login page
+       */
+    public function logout()
+    {
           Auth::logout();
           return redirect('/');
     }

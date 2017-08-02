@@ -13,10 +13,12 @@ Route::get('/auth', 'AuthController@provider');
 //callback route if user successfully authenticated by Twitter
 Route::get('/callback', 'AuthController@callback');
 
-
+Route::get('/error', function() {
+    return view('error');
+});
 //All Routes inside group will be checked for user's authentication by 'auth' middleware
 Route::group(['middleware'=>['auth']], function () {
-    
+
     //Return 10 Tweets and 10 Followers of logged in user
     Route::get('home', 'TwitterController@getTimeline')->name('home');
 
@@ -32,7 +34,7 @@ Route::group(['middleware'=>['auth']], function () {
     Route::POST('searchFollowers', function () {
         if (Request::ajax()) {
             //get searched name
-            $followerName=request('search');
+            $followerName=trim(request('search'));
 
             //Find Matching Names of Follower inside follower table
             $followers= App\Follower::where('name', 'like', "%$followerName%")

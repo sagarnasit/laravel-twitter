@@ -16,8 +16,9 @@ This is Laravel Application with expressive, elegant syntax which can allow user
 - Login page redirect user to twitter.com where user can login with his twitter account.
 - User has to allow application to use twitter in order to use this application.
 - Successfull login redirect user to the home page.
-- Home page display slider with latest 10 tweets from logged in user.
+- Home page display slider with latest 10 tweets with timestamp from logged in user.
 - It also display 10 Follower of logged in user right bellow the slider.
+- User can post new tweet from application.
 - User can search his/her follower from search text box that list out matched followers without any page reload.
 - On clicking of follower name from list will change slider with corressponding clicked user's latest 10 tweets.
 - User can also get his tweets by clicking Email button above the slider.
@@ -42,12 +43,18 @@ Use following command to clone application on your machine
 After Completion of clonning give coposer update
 - composer update
 
+## Constrain of Using Application
+- User must have a twitter account.
+- User must allow permission to application to login successful.
+- Twitter account of a user must be public in order to view its tweet and follower.
+- Due to the twitter api limitation for fetching data, there may be possiblity of missing some data.
 
-##Operating Instruction
 
 ## 3rd Party Libraries used in application
 - <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Tweeter
+Path= /vendor/laravel/socialite
 - <a href="https://github.com/thujohn/twitter">Thujohn/Twitter for fetching tweets and follower detail
+Path= /vendor/thujohn/twitter
 - <a href="http://getbootstrap.com/">Bootstrap</a> for Responsive Design
 - <a href="https://jquery.com/">JQuery</a> For Ajax
 - <a href="http://fontawesome.io/get-started/">Font Awesome</a> For Icons

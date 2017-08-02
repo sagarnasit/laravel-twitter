@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Twitter App</title>
+<title>Home | Twitter App</title>
 <link rel="icon" href="/images/logo.png">
 <!-- csrf for ajax -->
 <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -43,6 +43,9 @@ hr{
     display: flex;
     justify-content: center;
 }
+.font-size-18{
+    font-size: 2rem;
+}
 </style>
 </head>
 <body>
@@ -54,8 +57,9 @@ hr{
             <div class="title " align='center' style="margin-top:5%" >
 
                 <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive img-circle" width="170px">
-                <h3>Welcome: {{ Auth::user()->name }}</h3>
-                <h3>Handle: <strong>@</strong>{{Auth::user()->handle }}</h3>
+
+                <a target="_blank" class="font-size-18"
+                 href="http://twitter.com/{{Auth::user()->handle }}"><strong>@</strong>{{Auth::user()->handle}}</a>
             </div>
 
         </div>

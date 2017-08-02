@@ -4,7 +4,7 @@
       <div class="text-center" style="margin:1% 0 1% 0">
 
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Email</button>
+            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Email My Tweets</button>
       </div>
       <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-offset-1 col-xs-10 col-xs-offset-1  mydivs" id="slider">
 
@@ -16,19 +16,19 @@
 
                                     <div class="">
                                           <div>
-                                                <div >
-                                                      <p class="pull-left">{{ ++$key }} </p>
+                                                <div>
+                                                      <p class="pull-left">{{ sprintf("%02d", ++$key) }} </p>
                                                 </div>
-                                                <div style="margin-left:43%;float: left">
+                                                <div style="margin-left:43%;float: left;">
                                                       <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                                                       <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                                                 </div>
-                                                <div style="">
+                                                <div >
                                                       <p class="pull-right">{{ Twitter::ago($value['created_at']) }}</p>
                                                 </div>
-
+                                                 <div style="clear: both"></div>
                                           </div>
-                                          <div style="clear: both"></div>
+
 
                                           <div style="padding:2% 5% 5% 5%">
                                                 <hr>
@@ -58,7 +58,7 @@
 <!-- End Slider  -->
 
 <script type="text/javascript">
-    // slider javasript using jquery
+    // slider javascript using jquery
 
     // Display First Tweet
     var slideIndex = 1;
@@ -70,7 +70,7 @@
         showDivs(slideIndex += n);
     }
 
-    //funcion to change slide
+    //function to change slide
     function showDivs(n) {
 
         var i;
@@ -79,17 +79,17 @@
 
 
         if (n > x.length) {
-            slideIndex = 1
+            slideIndex = 1;
         }
         if (n < 1) {
-            slideIndex = x.length
+            slideIndex = x.length;
         }
         //hide all slides
         for (i = 0; i < x.length; i++) {
             // x[i].style.display = "none";
             $(x[i]).hide();
         }
-        // show next sslide
+        // show next slide
         $(x[slideIndex-1]).show();
     }
     //interval for changing slide
