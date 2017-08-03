@@ -48,6 +48,8 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - <a href="http://getbootstrap.com/">Bootstrap</a> CDN for Responsive Design
 - <a href="https://jquery.com/">JQuery</a> CDN for Ajax
 - <a href="http://fontawesome.io/get-started/">Font Awesome</a>CDN for Icons
+- Animate Css library
+    - <strong>Path:</strong> /public/css/animate.css
 
 ## Note
 - In order to maintain the latest version of  Bootstrap and Jquery, it linked with CDN.
