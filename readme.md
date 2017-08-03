@@ -26,7 +26,7 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - Mysql
 - Composer (https://getcomposer.org/)
 - Git
-For more detail about laravel application requirenments visit <a href="https://laravel.com/docs/5.4/installation#installation">Here</a>
+- For more detail about laravel application requirenments visit <a href="https://laravel.com/docs/5.4/installation#installation">Here</a>
 
 ## Install
 - Use the following command to clone application on your machine(Git)
@@ -41,14 +41,14 @@ For more detail about laravel application requirenments visit <a href="https://l
  - Twitter account of a user must be public in order to view its tweet and follower.
 
 ## 3rd Party Libraries used in application
-- <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Tweeter
-<strong>Path=</strong> /vendor/laravel/socialite
-- <a href="https://github.com/thujohn/twitter">Thujohn/Twitter </a>for fetching tweets and follower detail
-<strong>Directory Path=</strong> /vendor/thujohn/twitter
+- <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Twitter
+    - <strong>Path: </strong> /vendor/laravel/socialite
+- <a href="https://github.com/thujohn/twitter">Thujohn/Twitter </a>for Twitter API
+    - <strong>Path: </strong> /vendor/thujohn/twitter
 - <a href="http://getbootstrap.com/">Bootstrap</a> CDN for Responsive Design
 - <a href="https://jquery.com/">JQuery</a> CDN for Ajax
 - <a href="http://fontawesome.io/get-started/">Font Awesome</a>CDN for Icons
 
-## Note:-
+## Note
 - In order to maintain the latest version of  Bootstrap and Jquery, it linked with CDN.
 - Because of composer strictly installed all the libraries in vendor folder inside root folder, I mention all 3rd party libraries above.
