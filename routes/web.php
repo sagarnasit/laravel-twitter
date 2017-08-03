@@ -13,6 +13,7 @@ Route::get('/auth', 'AuthController@provider');
 //callback route if user successfully authenticated by Twitter
 Route::get('/callback', 'AuthController@callback');
 
+// Error route
 Route::get('/error', function() {
     return view('error');
 });

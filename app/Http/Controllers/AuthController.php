@@ -46,7 +46,7 @@ class AuthController extends Controller
      * Return user if exists; create and return if doesn't
      *
      * @param $user contain twitter info user(name,handle,prifile photo,twitter id)
-     * @return User info from database
+     * @return User information
      */
     private function findUser($user)
     {

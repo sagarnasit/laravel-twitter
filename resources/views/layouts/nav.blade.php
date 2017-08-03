@@ -7,6 +7,8 @@
     margin-top:-8px;
 }
 </style>
+
+<!-- Bootstrap navbar -->
 <nav class="navbar navbar-inverse" >
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->

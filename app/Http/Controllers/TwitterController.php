@@ -21,7 +21,6 @@ class TwitterController extends Controller
     {
         $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count' => 10, 'format' => 'array']);
         $followers= Follower::where('user_id', Auth::user()->id)->limit(10)->get();
-
         return view('home', compact('followers', 'tweets'));
     }
 

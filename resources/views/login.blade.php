@@ -3,8 +3,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | Twitter App</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
     <link rel="icon" href="/images/logo.png">
     <style>
 

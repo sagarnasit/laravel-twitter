@@ -60,7 +60,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Something is Wrong
+                    Something went Wrong
                 </div>
 
             </div>
