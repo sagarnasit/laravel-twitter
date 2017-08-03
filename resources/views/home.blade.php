@@ -8,6 +8,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- bootsratp css file -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/animate.css" >
 <!-- bootstrap font-awesome css -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <style>
@@ -37,7 +38,7 @@ hr{
     color: #00aced;
 }
 .margin-top{
-    margin-top:10rem;
+    margin-top:5rem;
 }
 .flex{
     display: flex;
@@ -49,7 +50,7 @@ hr{
 </style>
 </head>
 <body>
-    @include('nav')
+    @include('layouts.nav')
     <div class="container">
 
          <!-- Display User Profile pic, name and handle  -->
@@ -66,13 +67,13 @@ hr{
          <!-- end userInfo  -->
 
         {{--slider--}}
-        @include('slider')
+        @include('layouts.slider')
 
         {{--followerlist--}}
-        @include('followers')
+        @include('layouts.followers')
 
         {{--PopUps--}}
-        @include('popups')
+        @include('layouts.popups')
 
         <!-- show successfull popup msg -->
         @if(request()->session()->has('status'))

@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
         'twitter' => [
-        'client_id' => 'RTiIHgMBqGmyXWQqzRZ0cCcIz',
-        'client_secret' => 'eBnCUSSZcDS1ETUn73y2VO3aikBhVwuGP6yJKElRcGHZmuTnE2',
-        'redirect' => 'http://0c413150.ngrok.io/callback',
+        'client_id' => 'Ws3YDy22G8UUiM7RfspFtFIae',
+        'client_secret' => '55npr5Y6n4j61F8Kyv8kIj7Yd98EDFUr6XSo6Ulcya6FHJmoPO',
+        'redirect' =>  'http://localhost:8000/callback',
     ],
 
 ];

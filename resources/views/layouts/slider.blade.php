@@ -19,7 +19,7 @@
                                                 <div>
                                                       <p class="pull-left">{{ sprintf("%02d", ++$key) }} </p>
                                                 </div>
-                                                <div style="margin-left:43%;float: left;">
+                                                <div style="margin-left:40%;float: left;">
                                                       <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                                                       <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                                                 </div>
@@ -86,13 +86,12 @@
         }
         //hide all slides
         for (i = 0; i < x.length; i++) {
-            // x[i].style.display = "none";
             $(x[i]).hide();
         }
         // show next slide
         $(x[slideIndex-1]).show();
     }
     //interval for changing slide
-    setInterval(function(){plusDivs(1);},5000);
+    setInterval(function(){ plusDivs(1); },5000);
 
 </script>

@@ -1,21 +1,22 @@
 <!-- Ajax data for Follower list -->
-<div class=" ">
+<div class="animated flash rubberBand">
     @if(!empty($tweets))
         @foreach($tweets as $key => $value)
         <div class=" mySlides">
 
             <div class="">
                 <div>
-                    <div >
-                        <p class="pull-left">{{ ++$key }} </p>
+                    <div>
+                        <p class="pull-left">{{ sprintf("%02d", ++$key) }} </p>
                     </div>
-                    <!-- prev-next button -->
-                    <div style="margin-left:43%">
+                    <div style="margin-left:43%;float: left;">
                         <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                         <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                     </div>
-
-                    
+                    <div >
+                        <p class="pull-right">{{ Twitter::ago($value['created_at']) }}</p>
+                    </div>
+                    <div style="clear: both"></div>
                 </div>
                 <!-- tweet -->
                 <div style="padding:2% 5% 5% 5%">

@@ -4,7 +4,7 @@
 
 //return login response if user isn't authenticated
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 })->name('login')->middleware(['guest']);
 
 //redirect user to Authenticate by his twitter credentials

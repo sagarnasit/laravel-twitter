@@ -52,12 +52,12 @@ After Completion of clonning give coposer update
 
 ## 3rd Party Libraries used in application
 - <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Tweeter
-Path= /vendor/laravel/socialite
-- <a href="https://github.com/thujohn/twitter">Thujohn/Twitter for fetching tweets and follower detail
-Path= /vendor/thujohn/twitter
-- <a href="http://getbootstrap.com/">Bootstrap</a> for Responsive Design
-- <a href="https://jquery.com/">JQuery</a> For Ajax
-- <a href="http://fontawesome.io/get-started/">Font Awesome</a> For Icons
+<strong>Path=</strong> /vendor/laravel/socialite
+- <a href="https://github.com/thujohn/twitter">Thujohn/Twitter </a>for fetching tweets and follower detail
+<strong>Directory Path=</strong> /vendor/thujohn/twitter
+- <a href="http://getbootstrap.com/">Bootstrap</a> CDN for Responsive Design
+- <a href="https://jquery.com/">JQuery</a> CDNFor Ajax
+- <a href="http://fontawesome.io/get-started/"> CDN Font Awesome</a> For Icons
 
 
 ## License
