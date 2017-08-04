@@ -28,7 +28,7 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - Git
 - For more detail about laravel application requirenments visit <a href="https://laravel.com/docs/5.4/installation#installation">Here</a>
 
-## Install
+## Installation
 - Use the following command to clone application on your machine(Git)
     - `git clone https://github.com/sagarnasit/Twitter_App.git`
 
@@ -48,8 +48,6 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - <a href="http://getbootstrap.com/">Bootstrap</a> CDN for Responsive Design
 - <a href="https://jquery.com/">JQuery</a> CDN for Ajax
 - <a href="http://fontawesome.io/get-started/">Font Awesome</a>CDN for Icons
-- Animate Css library
-    - <strong>Path:</strong> /public/css/animate.css
 
 ## Note
 - In order to maintain the latest version of  Bootstrap and Jquery, it linked with CDN.

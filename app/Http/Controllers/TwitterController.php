@@ -30,8 +30,8 @@ class TwitterController extends Controller
      */
     public function sendMail()
     {
-
-        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle ,'count'=>3200 ,'format' => 'array']);
+        $this->validate(request(), ['email' => 'required|email']);
+        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count'=>3200, 'format' => 'array']);
         $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
 
         $this->send($tweets, $pdf);
