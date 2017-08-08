@@ -75,17 +75,25 @@ class AuthController extends Controller
     private function createFollowers($newUser)
     {
 
-        $followers = Twitter::getFollowers(['screen_name' => $newUser->handle, 'format' => 'array']);
+
 
         /**
          * loop through all followers and insert into database
          */
-        foreach ($followers['users'] as $follower) {
-                Follower::create([
-                    'user_id' => $newUser->id,
-                    'name' => $follower['name'],
-                    'screen_name' => $follower['screen_name'],
-                ]);
+        $cursor=-1;
+        $count=0;
+        while($cursor !=0 && $count!=15){
+            $followers = Twitter::getFollowers(['screen_name' => $newUser->handle, 'count' => 200, 'cursor' => $cursor, 'format' => 'array']);
+
+            foreach ($followers['users'] as $follower) {
+                    Follower::create([
+                        'user_id' => $newUser->id,
+                        'name' => $follower['name'],
+                        'screen_name' => $follower['screen_name'],
+                    ]);
+            }
+            $cursor=$followers['next_cursor'];
+            $count++;
         }
         return;
     }

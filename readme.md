@@ -32,8 +32,8 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - Use the following command to clone application on your machine(Git)
     - `git clone https://github.com/sagarnasit/Twitter_App.git`
 
-- After cloning run following command to install all libraries.
-    - `composer update`
+- After cloning run following command inside root directory to install all libraries.
+    - `composer install --no-dev`
 
 ## Constraint of Using Application
  - User must have a twitter account.
