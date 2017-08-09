@@ -16,6 +16,23 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - The user can get his/her tweets in PDF file via Email by clicking Email button above the slider.
 - Email button will ask for an email address on which user wants to receive his/her Tweets as PDF file.
 
+
+## Directory Structure
+.
+    ├── Root Directory
+    ├── app
+    |   ├── Http
+    |   |   ├── Controllers     # Controllers handling request and response
+    |   |   ├── Middleware      # Applied Middleware
+    │   ├── database            
+    |   |   ├── migrations      # contain all migrations files for the database
+    │   ├── public              # all publicaly available files i.e images,css,js
+    │   └── resources
+    |   |   ├── views           # contain all the php blade files which render on browser
+    |   ├── routes              # contain all routes of application
+    └── ...
+
+
 ## System Requirenments
 - PHP >= 5.6.4
     - OpenSSL PHP Extension

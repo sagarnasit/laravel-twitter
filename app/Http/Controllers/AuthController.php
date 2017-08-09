@@ -74,9 +74,6 @@ class AuthController extends Controller
      */
     private function createFollowers($newUser)
     {
-
-
-
         /**
          * loop through all followers and insert into database
          */
