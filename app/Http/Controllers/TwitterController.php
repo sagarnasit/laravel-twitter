@@ -19,6 +19,7 @@ class TwitterController extends Controller
      */
     public function getTimeline()
     {
+        // return $this->getTweets();
         $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count' => 10, 'format' => 'array']);
         $followers= Follower::where('user_id', Auth::user()->id)->limit(10)->get();
         return view('home', compact('followers', 'tweets'));
@@ -31,7 +32,7 @@ class TwitterController extends Controller
     public function sendMail()
     {
         $this->validate(request(), ['email' => 'required|email']);
-        $tweets= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle, 'count'=>200, 'format' => 'array']);
+        $tweets= $this->getTweets();
         $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
 
         $this->send($tweets, $pdf);
@@ -65,6 +66,26 @@ class TwitterController extends Controller
           Twitter::postTweet(['status' => $tweet, 'format' => 'json']);
           request()->session()->flash('status', 'Tweet Posted');
           return redirect('/home');
+    }
+
+    private function getTweets(){
+        $count=0;
+        $tweets=array();
+        $available=true;
+        while($available != false && $count!= 5){
+            $tweet= Twitter::getUserTimeline(['screen_name' => 'mkbhd', 'page' => $count, 'count'=>200, 'format' => 'array']);
+            if(empty($tweet)){
+                $available=false;
+            }
+            else{
+                foreach ($tweet as $t) {
+                    array_push($tweets,$t);
+                }
+            }
+            $count++;
+
+        }
+        return $tweets;
     }
 
 }

@@ -7,7 +7,7 @@
     <style media="screen">
     p{
         color: #00aced;
-        font-size:14px;
+        font-size:10px;
     }
     </style>
 </head>
@@ -17,7 +17,7 @@
     </div>
     <!-- twitter logo -->
     <div align='center'>
-        <img src="images/logo.png" alt="" width="150px">
+        <!-- <img src="images/logo.png" alt="" width="150px"> -->
     </div>
 
     <!-- display name and handle -->
@@ -42,7 +42,7 @@
                 </div>
                 <!-- Tweet -->
                 <div >
-                    <hr style="border:0.2px 0 0 0 solid black">
+                    <!-- <hr style="border:0.2px 0 0 0 solid black"> -->
                     <p>{{ $value['text'] }}</p>
 
                 </div>

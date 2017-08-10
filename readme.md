@@ -18,18 +18,19 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 
 
 ## Directory Structure
-.
+
     ├── Root Directory
     ├── app
     |   ├── Http
     |   |   ├── Controllers     # Controllers handling request and response
     |   |   ├── Middleware      # Applied Middleware
-    │   ├── database            
-    |   |   ├── migrations      # contain all migrations files for the database
-    │   ├── public              # all publicaly available files i.e images,css,js
-    │   └── resources
-    |   |   ├── views           # contain all the php blade files which render on browser
-    |   ├── routes              # contain all routes of application
+    ├── config                  # configuration file for laravel
+    ├── database            
+    |   ├── migrations          # contain all migrations files for the database
+    ├── public                  # all publicaly available files i.e images,css,js
+    │── resources
+    |   ├── views               # contain all the php blade files which render on browser
+    ├── routes                  # contain all routes of application
     └── ...
 
 
