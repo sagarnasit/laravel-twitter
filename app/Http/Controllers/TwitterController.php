@@ -68,22 +68,27 @@ class TwitterController extends Controller
           return redirect('/home');
     }
 
-    private function getTweets(){
-        $count=0;
-        $tweets=array();
-        $available=true;
-        while($available != false && $count!= 5){
-            $tweet= Twitter::getUserTimeline(['screen_name' => 'mkbhd', 'page' => $count, 'count'=>200, 'format' => 'array']);
-            if(empty($tweet)){
+      /**
+       * this function get tweets from user's timeline (max=500)
+       * @return array of tweets
+       */
+    private function getTweets()
+    {
+        $count=0;//maintain count of number of responses from twitter api
+        $tweets=array();//store tweets from every response
+        $available=true;//look for the next response
+        while ($available != false && $count!= 5) {
+            $tweet= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle,
+                  'page' => $count, 'count'=>100,'format' => 'array']);
+            if (empty($tweet)) {
                 $available=false;
-            }
-            else{
+            } else {
+                //store each tweet in array
                 foreach ($tweet as $t) {
-                    array_push($tweets,$t);
+                    array_push($tweets, $t);
                 }
             }
             $count++;
-
         }
         return $tweets;
     }

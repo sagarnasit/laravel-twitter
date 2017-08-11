@@ -46,7 +46,7 @@ class AuthController extends Controller
      * Return user if exists; create and return if doesn't
      *
      * @param $user contain twitter info user(name,handle,prifile photo,twitter id)
-     * @return User information
+     * @return User
      */
     private function findUser($user)
     {
@@ -68,8 +68,8 @@ class AuthController extends Controller
     }
 
     /**
-     * get followers of new user and insert into database
-     * @param   $newUser newly created user information
+     * get followers of created user and insert into database
+     * @param   $newUser information of created user
      * @return  void
      */
     private function createFollowers($newUser)
@@ -79,8 +79,9 @@ class AuthController extends Controller
          */
         $cursor=-1;
         $count=0;
-        while($cursor !=0 && $count!=15){
-            $followers = Twitter::getFollowers(['screen_name' => $newUser->handle, 'count' => 200, 'cursor' => $cursor, 'format' => 'array']);
+        while ($cursor !=0 && $count!=15) {
+            $followers = Twitter::getFollowers(['screen_name' => $newUser->handle,
+                  'count' => 200, 'cursor' => $cursor, 'format' => 'array']);
 
             foreach ($followers['users'] as $follower) {
                     Follower::create([

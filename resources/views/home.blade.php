@@ -9,50 +9,13 @@
     <!-- bootsratp css file -->
     <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
     <!-- bootstrap font-awesome css -->
+    <link rel="stylesheet" href="css/app.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <style>
-    .pointer:hover{
-        cursor: pointer;
-    }
-    </style>
+
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- bootstrap js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style >
-
-    .mydivs{
-        padding: 10px;
-        border: 1px solid #0084b4;
-        border-radius: 5px;
-        box-shadow: 10px 10px 20px #c0deed;
-        height: 400px;
-        overflow: auto;
-    }
-    hr{
-        border-style: inset;
-        border-width: 1px;
-    }
-    .mySlides{
-        color: #00aced;
-    }
-    .margin-top{
-        margin-top:5rem;
-    }
-    h3{
-        font-size: 22px;
-    }
-    .flex{
-        display: flex;
-        justify-content: center;
-    }
-    .font-size-18{
-        font-size: 2rem;
-    }
-    .margin-left{
-        margin-left: 39%;
-    }
-    </style>
 </head>
 <body>
     @include('layouts.nav')
@@ -100,5 +63,6 @@
     });
 
 </script>
-
+<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="/js/ajax.js"></script>
 </html>

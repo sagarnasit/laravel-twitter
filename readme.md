@@ -23,14 +23,18 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
     ├── app
     |   ├── Http
     |   |   ├── Controllers     # Controllers handling request and response
-    |   |   ├── Middleware      # Applied Middleware
+    |   |   └── Middleware      # Applied Middleware
     ├── config                  # configuration file for laravel
     ├── database            
-    |   ├── migrations          # contain all migrations files for the database
-    ├── public                  # all publicaly available files i.e images,css,js
+    |   └── migrations          # contain all migrations files for the database
+    ├── public                  # all publically available files
+    |   ├── css                 # all custome css
+    |   ├── js                  # all custome javascript
+    |   └── images              # all images
     │── resources
-    |   ├── views               # contain all the php blade files which render on browser
+    |   └── views               # contain all the php blade files which render on browser
     ├── routes                  # contain all routes of application
+    ├── tests                   # caontain test files.
     └── ...
 
 
@@ -68,5 +72,8 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - <a href="http://fontawesome.io/get-started/">Font Awesome</a>CDN for Icons
 
 ## Note
-- In order to maintain the latest version of  Bootstrap and Jquery, it linked with CDN.
-- Because of composer strictly installed all the libraries in vendor folder inside root folder, I mention all 3rd party libraries above.
+- In order to maintain the latest version of  Bootstrap and Jquery, CDN is used to get files.
+- Because of composer installes all the libraries in vendor folder inside root folder, I mention all 3rd party libraries above.
+- Laravel Provide Dusk which is used to test laravel application. It uses browser to run the test. Please read <a href="https://laravel.com/docs/5.4/dusk">Dusk</a> before running the tests.
+## App link
+ Click <a href="http://139.59.46.145" target="_blank">here</a>
