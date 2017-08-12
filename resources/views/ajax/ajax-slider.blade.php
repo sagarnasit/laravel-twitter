@@ -7,7 +7,8 @@
                 {{ session('ajax') }}'s Tweet Loaded!
             </div>
             <script>
-                setInterval(hide,5000);
+                clearInterval(i);
+                var i=setInterval(hide,5000);
                 function hide(){
                     $('.flashmsg').css("display","none");
                 }

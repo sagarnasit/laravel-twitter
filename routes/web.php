@@ -8,7 +8,7 @@ Route::get('/', function () {
 })->name('login')->middleware(['guest']);
 
 //redirect user to Authenticate by his twitter credentials
-Route::get('/auth', 'AuthController@provider');
+Route::get('/auth', 'AuthController@provider')->name('twitter.login');
 
 //callback route if user successfully authenticated by Twitter
 Route::get('/callback', 'AuthController@callback')->name('twitter.callback');
@@ -29,7 +29,7 @@ Route::group(['middleware'=>['auth']], function () {
     //Post tweet from user's twitter Account
     Route::post('postTweet', 'TwitterController@postTweet');
 
-    Route::get('logout', 'AuthController@logout');
+    Route::get('logout', 'AuthController@logout')->name('twitter.logout');
 
     //Ajax call for searching Followers
     Route::POST('searchFollowers', function () {
@@ -63,4 +63,10 @@ Route::group(['middleware'=>['auth']], function () {
         }
     });
 
+});
+
+
+
+Route::get('getTweets',function(){
+    return Twitter::getHomeTimeline([ 'count' => 20, 'format' => 'arrray']);
 });

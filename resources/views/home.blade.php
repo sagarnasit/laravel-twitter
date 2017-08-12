@@ -23,7 +23,7 @@
             position: fixed;
             background-color: rgba(180,241,196,.9);
             display: flex;
-            left: 2px;
+            right: 2px;
             border:1px black solid;
             border-radius: 3px;
             top:8%;

@@ -9,7 +9,9 @@ use Psy\Exception\RuntimeException;
 use Socialite;
 use Twitter;
 use App\Follower;
-
+use Session;
+use Redirect;
+use Illuminate\Support\Facades\Input;
 class AuthController extends Controller
 {
     /**
@@ -19,26 +21,72 @@ class AuthController extends Controller
      */
     public function provider()
     {
-        return Socialite::driver('twitter')->redirect();
+
+    	$sign_in_twitter = true;
+    	$force_login = false;
+        // reset config in case of login
+    	Twitter::reconfig(['token' => '', 'secret' => '']);
+    	$token = Twitter::getRequestToken(route('twitter.callback')); //get request tokens
+
+    	if (isset($token['oauth_token_secret']))
+    	{
+    		$url = Twitter::getAuthorizeURL($token, $sign_in_twitter, $force_login);
+            //set oauth token and secret token in session
+    		Session::put('oauth_state', 'start');
+    		Session::put('oauth_request_token', $token['oauth_token']);
+    		Session::put('oauth_request_token_secret', $token['oauth_token_secret']);
+
+    		return Redirect::to($url);//return to callback url with auth info
+    	}
+
+    	return Redirect::route('twitter.error');
     }
 
     /**
-     * Fetch the user information from Twitter.
+     * Fetch the user information from callback url and login the user.
      *
      * @return Response to home
      */
     public function callback()
     {
-        try {
-            $user=Socialite::driver('twitter')->user();
-        } catch (Exception $e) {
-            return redirect('/auth');
+        if (Session::has('oauth_request_token')) //check for outh token
+        {
+            $request_token = [
+                'token'  => Session::get('oauth_request_token'),
+                'secret' => Session::get('oauth_request_token_secret'),
+            ]; //get oauth token and secret token from session
+
+            Twitter::reconfig($request_token);
+
+            $oauth_verifier = false;
+
+            if (Input::has('oauth_verifier'))
+            {
+                $oauth_verifier = Input::get('oauth_verifier');
+                // getAccessToken() will reset the token for you
+                $token = Twitter::getAccessToken($oauth_verifier);
+            }
+            // error if can't find aouth token secret
+            if (!isset($token['oauth_token_secret']))
+            {
+                return Redirect::route('twitter.error');
+            }
+
+            $credentials = Twitter::getCredentials(['format' => 'array']);
+
+            if (is_array($credentials) && !isset($credentials->error))
+            {
+                // find or create new user
+                $user= $this->findUser($credentials);
+                // login user via Auth
+                Auth::login($user);
+
+                Session::put('access_token', $token);
+
+                return Redirect::to('/home');
+            }
+            return Redirect::route('twitter.error');
         }
-
-        $authUser=$this->findUser($user);
-
-        Auth::login($authUser, true);
-        return redirect("/home");
     }
 
 
@@ -51,16 +99,16 @@ class AuthController extends Controller
     private function findUser($user)
     {
         //check user already exist
-        $authUser = User::where('twitter_id', $user->id)->first();
+        $authUser = User::where('twitter_id', $user['id'])->first();
         if ($authUser) {
             return $authUser;
         }
         //if not then create a new
         $newUser= User::create([
-            'name' => $user->name,
-            'handle' => $user->nickname,
-            'twitter_id' => $user->id,
-            'avatar' => $user->avatar_original,
+            'name' => $user['name'],
+            'handle' => $user['screen_name'],
+            'twitter_id' => $user['id'],
+            'avatar' => $user['profile_image_url_https'],
         ]);
         //create followers of new user
         $this->createFollowers($newUser);
@@ -74,9 +122,6 @@ class AuthController extends Controller
      */
     private function createFollowers($newUser)
     {
-        /**
-         * loop through all followers and insert into database
-         */
         $cursor=-1;
         $count=0;
         while ($cursor !=0 && $count!=15) {
@@ -102,8 +147,9 @@ class AuthController extends Controller
        */
     public function logout()
     {
-          Auth::logout();
-          return redirect('/');
+        Session::forget('access_token');
+        Auth::logout();
+        return Redirect::to('/');
     }
 
 }

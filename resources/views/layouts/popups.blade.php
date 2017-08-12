@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
-                    <input type="email" class="form-control" id="email" name="email"
+                    <input type="email" class="form-control" id="email" name="email" value={{ $email }}
                     value="" placeholder="Enter Email Address" required>
 
                 </div>

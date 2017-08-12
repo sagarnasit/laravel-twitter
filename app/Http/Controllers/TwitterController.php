@@ -16,10 +16,11 @@ class TwitterController extends Controller
     */
     public function getTimeline()
     {
-        // return $this->getTweets();
         $tweets= Twitter::getHomeTimeline([ 'count' => 10, 'format' => 'array']);
         $followers= Follower::where('user_id', Auth::user()->id)->limit(10)->get();
-        return view('home', compact('followers', 'tweets'));
+        $credentials = Twitter::getCredentials(['include_email' => 'true', 'format' => 'array']);
+        $email=$credentials['email'];
+        return view('home', compact('followers', 'tweets', 'email'));
     }
     /**
     * this function retrieve tweets of logged in user and generate pdf of tweets

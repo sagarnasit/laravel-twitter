@@ -40,7 +40,7 @@
                     <!-- slide body -->
                     <div style="padding:2% 5% 5% 5%">
                         <hr>
-                        <!-- tweet  -->
+                        <!-- tweet from home timeline  -->
                         <h3>{{ $value['text'] }}</h3>
                         @if(!empty($value['extended_entities']['media']))
                         @foreach($value['extended_entities']['media'] as $v)

@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
+
         Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
@@ -228,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        
         'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
