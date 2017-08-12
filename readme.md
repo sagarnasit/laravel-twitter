@@ -13,7 +13,7 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - The user can post a new tweet from the application.
 - The user can search his/her follower from search text box that lists out matched followers without any page reload.
 - On clicking of follower name from a list will change slider with corresponding clicked user's latest 10 tweets.
-- The user can get his/her tweets in PDF file via Email by clicking Email button above the slider.
+- The user can get his/her tweets in PDF file via Email by clicking Email Me or Download as PDF by clicking Download button above the slider.
 - Email button will ask for an email address on which user wants to receive his/her Tweets as PDF file.
 
 
@@ -63,8 +63,6 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
  - Twitter account of a user must be public in order to view its tweet and follower.
 
 ## 3rd Party Libraries used in application
-- <a href="https://github.com/laravel/socialite" >Socialite</a> for Login With Twitter
-    - <strong>Path: </strong> /vendor/laravel/socialite
 - <a href="https://github.com/thujohn/twitter">Thujohn/Twitter </a>for Twitter API
     - <strong>Path: </strong> /vendor/thujohn/twitter
 - <a href="http://getbootstrap.com/">Bootstrap</a> CDN for Responsive Design

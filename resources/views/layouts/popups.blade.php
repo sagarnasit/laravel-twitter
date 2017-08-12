@@ -16,7 +16,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="send" class="btn btn-primary">Go</button>
+                    <button type="submit" name="send" class="btn btn-primary">Email</button>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>

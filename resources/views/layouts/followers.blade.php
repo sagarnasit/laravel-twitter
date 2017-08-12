@@ -17,7 +17,7 @@
                   </div>
 
                   <!-- display follower list -->
-                  <div class="followers flex " id="output" style="overflow:auto;height:400px">
+                  <div class="followers flex " id="output" style="overflow:auto;height:500px">
                         <table class="table table-responsive table-striped table-hover table-border table-bordered">
                               @if(isset($followers))
                                     @foreach($followers as $follower)

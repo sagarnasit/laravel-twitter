@@ -40,7 +40,7 @@
         <div class="userInfo content">
             <div class="title " align='center' style="margin-top:5%" >
 
-                <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive img-circle" width="170px">
+                <img src="{{ Auth::user()->avatar }}" alt="" class="img img-responsive img-circle" width="150px">
 
                 <a target="_blank" class="font-size-18"
                 href="http://twitter.com/{{Auth::user()->handle }}"><strong>@</strong>{{Auth::user()->handle}}</a>
@@ -49,6 +49,14 @@
         </div>
         <!-- end userInfo  -->
 
+        <div class="text-center" style="margin:1% 0 1% 0">
+
+            <!-- Trigger the modal with a button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Email Me</button>
+                <a href="/download" class="btn btn-primary">Download</a>
+            </div>
+        </div>
         {{--slider--}}
         @include('layouts.slider')
 

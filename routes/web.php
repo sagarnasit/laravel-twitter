@@ -26,6 +26,8 @@ Route::group(['middleware'=>['auth']], function () {
     //Send PDF of user's tweets to his email
     Route::post('sendPDF', 'TwitterController@sendMail');
 
+    //Download tweets
+    Route::get('/download', 'TwitterController@download');
     //Post tweet from user's twitter Account
     Route::post('postTweet', 'TwitterController@postTweet');
 
@@ -63,10 +65,4 @@ Route::group(['middleware'=>['auth']], function () {
         }
     });
 
-});
-
-
-
-Route::get('getTweets',function(){
-    return Twitter::getHomeTimeline([ 'count' => 20, 'format' => 'arrray']);
 });

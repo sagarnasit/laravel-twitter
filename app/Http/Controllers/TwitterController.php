@@ -50,6 +50,14 @@ class TwitterController extends Controller
         });
         return;
     }
+
+    public function download()
+    {
+          $tweets= $this->getTweets();
+          $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
+          return $pdf->download('tweets.pdf');
+    }
+
     /**
     * this function post tweet from logged in user's twitter account
     * @return response of successful tweet post

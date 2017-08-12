@@ -1,13 +1,6 @@
 <!-- Slider  -->
 <div class="row">
 
-    <div class="text-center" style="margin:1% 0 1% 0">
-
-        <!-- Trigger the modal with a button -->
-        <div class="form-group">
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Email My Tweets</button>
-        </div>
-    </div>
     <!-- Slider Box -->
     <div class="col-md-offset-3 col-md-6 col-md-offset-3 col-xs-offset-1 col-xs-10 col-xs-offset-1  mydivs" id="slider">
 
