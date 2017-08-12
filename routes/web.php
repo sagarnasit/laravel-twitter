@@ -11,10 +11,10 @@ Route::get('/', function () {
 Route::get('/auth', 'AuthController@provider');
 
 //callback route if user successfully authenticated by Twitter
-Route::get('/callback', 'AuthController@callback');
+Route::get('/callback', 'AuthController@callback')->name('twitter.callback');
 
 // Error route
-Route::get('/error', function() {
+Route::get('/error', function () {
     return view('error');
 });
 //All Routes inside group will be checked for user's authentication by 'auth' middleware
@@ -51,14 +51,15 @@ Route::group(['middleware'=>['auth']], function () {
     //Ajax call for tweets slider of a Follower
     Route::get('changeSlider', function () {
         if (Request::ajax()) {
+              $handle=request('handle');
             //Get 10 Tweets Of Clicked Follower
             $tweets= \Twitter::getUserTimeline([
-                  'screen_name' => request('handle'),
+                  'screen_name' => $handle,
                   'count' => 10,
                   'format' => 'array']);
-
+                  request()->session()->flash('ajax', $handle);
             //return new slider with 10 tweets of clicked Follower
-            return view('ajax.ajax-slider', compact(['tweets', 'handle']));
+            return view('ajax.ajax-slider', compact(['tweets']));
         }
     });
 

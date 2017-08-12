@@ -16,10 +16,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- bootstrap js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .flashmsg{
+            padding:10px;
+            z-index: 1;
+            position: fixed;
+            background-color: rgba(180,241,196,.9);
+            display: flex;
+            left: 2px;
+            border:1px black solid;
+            border-radius: 3px;
+            top:8%;
+            font-size:15px;
+        }
+    </style>
 </head>
 <body>
     @include('layouts.nav')
     <div class="container">
+
 
         <!-- Display User Profile pic, name and handle  -->
         <div class="userInfo content">

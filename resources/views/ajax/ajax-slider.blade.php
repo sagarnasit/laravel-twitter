@@ -2,7 +2,17 @@
 <div class="animated flash rubberBand">
 
     <div class=" " id="insideSlider">
-
+        @if(session('ajax'))
+            <div class="flashmsg">
+                {{ session('ajax') }}'s Tweet Loaded!
+            </div>
+            <script>
+                setInterval(hide,5000);
+                function hide(){
+                    $('.flashmsg').css("display","none");
+                }
+            </script>
+        @endif
         @if(!empty($tweets))
         @foreach($tweets as $key => $value)
         <!-- individual tweet -->

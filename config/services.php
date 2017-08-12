@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
         'twitter' => [
-        'client_id' => 'Ws3YDy22G8UUiM7RfspFtFIae',
-        'client_secret' => '55npr5Y6n4j61F8Kyv8kIj7Yd98EDFUr6XSo6Ulcya6FHJmoPO',
+        'client_id' => env('TWITTER_CONSUMER_KEY'),
+        'client_secret' => env('TWITTER_CONSUMER_SECRET'),
         'redirect' =>  'http://localhost:8000/callback',
     ],
 

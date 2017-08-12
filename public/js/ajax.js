@@ -11,7 +11,7 @@ function searchFollowers(){
         url:"/searchFollowers",
         data:val,
         success:function(data){
-            console.log(data);
+            // console.log(data);
             // load data in HTML
             $('#output').html(data);
         }
@@ -25,8 +25,9 @@ function getFollowerTweets(handle){
     //get clicked follower
     var val=handle;
     $('#insideSlider').hide();
-    $('html, body').animate({scrollTop:0},500);
-    $('#gify').css('display','block');
+    $('html, body').animate({ scrollTop:0 }, 500);
+    $('#gify').css('display', 'block');
+
     //Ajax call to retrive tweets
     $.ajax({
         type:"GET",
@@ -35,6 +36,7 @@ function getFollowerTweets(handle){
         success:function(data){
             // load data in HTML slider
             $('#slider').html(data);
+            $('.flashmsg').css('display', 'block');
         }
     });
 
