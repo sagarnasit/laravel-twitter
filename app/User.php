@@ -10,7 +10,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 */
 class User extends Authenticatable
 {
-        
+    /*
+     * mass assignment fields
+     *
+     * @var array
+     */
     protected $fillable = [
         'name', 'handle', 'avatar','twitter_id'
     ];

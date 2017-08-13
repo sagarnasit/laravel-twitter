@@ -1,39 +1,62 @@
 <?php
 
 
-
-//return login response if user isn't authenticated
+/*
+ * return login response
+ */
 Route::get('/', function () {
     return view('login');
 })->name('login')->middleware(['guest']);
 
-//redirect user to Authenticate by his twitter credentials
+/*
+ *redirect user to Authenticate on twitter
+ */
 Route::get('/auth', 'AuthController@provider')->name('twitter.login');
 
-//callback route if user successfully authenticated by Twitter
+/*
+ *callback route when user successfully authenticated by Twitter
+ */
 Route::get('/callback', 'AuthController@callback')->name('twitter.callback');
 
-// Error route
+/*
+ * Error
+ */
 Route::get('/error', function () {
     return view('error');
-});
-//All Routes inside group will be checked for user's authentication by 'auth' middleware
-Route::group(['middleware'=>['auth']], function () {
+})->name('twitter.error');
 
-    //Return 10 Tweets and 10 Followers of logged in user
+/*
+ *All Routes inside group will be checked for user's authentication by 'auth' middleware
+ */
+Route::group(['middleware'=>['auth']], function () {
+    /*
+     *Return 10 Tweets and 10 Followers of logged in user
+     */
     Route::get('home', 'TwitterController@getTimeline')->name('home');
 
-    //Send PDF of user's tweets to his email
+    /*
+     *Send PDF of user's tweets to his email
+     */
     Route::post('sendPDF', 'TwitterController@sendMail');
 
-    //Download tweets
+    /*
+     * Download tweets in PDF
+     */
     Route::get('/download', 'TwitterController@download');
-    //Post tweet from user's twitter Account
+
+    /*
+     *Post tweet on user's timeline
+     */
     Route::post('postTweet', 'TwitterController@postTweet');
 
+    /*
+     * Log out
+     */
     Route::get('logout', 'AuthController@logout')->name('twitter.logout');
 
-    //Ajax call for searching Followers
+    /*
+     *Ajax call for searching Followers
+     */
     Route::POST('searchFollowers', function () {
         if (Request::ajax()) {
             //get searched name
@@ -50,7 +73,9 @@ Route::group(['middleware'=>['auth']], function () {
         }
     });
 
-    //Ajax call for tweets slider of a Follower
+    /*
+     *Ajax call for tweets slider of a Follower
+     */
     Route::get('changeSlider', function () {
         if (Request::ajax()) {
               $handle=request('handle');

@@ -2,6 +2,8 @@
 <div class="animated flash rubberBand">
 
     <div class=" " id="insideSlider">
+
+        {{--notification--}}
         @if(session('ajax'))
             <div class="flashmsg">
                 {{ session('ajax') }}'s Tweet Loaded!
@@ -14,6 +16,8 @@
                 }
             </script>
         @endif
+        {{--notification end--}}
+
         @if(!empty($tweets))
         @foreach($tweets as $key => $value)
         <!-- individual tweet -->
@@ -31,12 +35,14 @@
                         <button class="btn btn-default left pull-" onclick="plusDivs(-1)">&#10094;</button>
                         <button class="btn btn-default right" onclick="plusDivs(1)">&#10095;</button>
                     </div>
+
                     <!-- timestamp -->
                     <div >
                         <p class="pull-right">{{ Twitter::ago($value['created_at']) }}</p>
                     </div>
                     <div style="clear: both"></div>
-                </div><!-- End slider header -->
+                </div>
+                <!-- End slider header -->
 
                 <!-- slide body -->
                 <div style="padding:2% 5% 5% 5%">
@@ -49,9 +55,13 @@
                     <img src="{{ $v['media_url_https'] }}" style="width:300px;">
                     @endforeach
                     @endif
-                </div><!-- End slide body -->
+                </div>
+                <!-- End slide body -->
+
             </div>
-        </div><!-- End individual tweet -->
+        </div>
+            <!-- End individual tweet -->
+
         @endforeach
         <!-- display No Tweets msg if not  -->
         @else
@@ -64,11 +74,15 @@
         @endif
 
     </div>
+
     <div id="gify" style="display:none;" align="center">
         <img src="images/loading.gif" />
     </div>
+
 </div>
+
 <script>
-var slideIndex = 1;
-showDivs(slideIndex);
+//    call change slider
+    var slideIndex = 1;
+    showDivs(slideIndex);
 </script>
