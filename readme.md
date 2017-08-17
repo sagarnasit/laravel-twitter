@@ -15,6 +15,9 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - On clicking of follower name from a list will change slider with corresponding clicked user's latest 10 tweets.
 - The user can get his/her tweets in PDF file via Email by clicking Email Me or Download as PDF by clicking Download button above the slider.
 - Email button will ask for an email address on which user wants to receive his/her Tweets as PDF file.
+- Seach box on navigation bar will search for user by its handle and rensponse result with top 5 match to seached String
+- clicking on users's handle from list will display profile info beside the user list
+- clicking on "Download Tweets" will download PDF file of that user's tweets
 
 
 ## Directory Structure
@@ -35,6 +38,7 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
     |   └── views               # contain all the php blade files which render on browser
     ├── routes                  # contain all routes of application
     ├── tests                   # caontain test files.
+    ├── vendor                  # all libraries used in application
     └── ...
 
 
@@ -62,6 +66,7 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
  - In order to login successfully, a user must allow permission to the application.
  - Twitter account of a user must be public in order to view its tweet and follower.
 
+
 ## 3rd Party Libraries used in application
 - <a href="https://github.com/thujohn/twitter">Thujohn/Twitter </a>for Twitter API
     - <strong>Path: </strong> /vendor/thujohn/twitter
@@ -73,5 +78,6 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - In order to maintain the latest version of  Bootstrap and Jquery, CDN is used to get files.
 - Because of composer installes all the libraries in vendor folder inside root folder, I mention all 3rd party libraries above.
 - Laravel Provide Dusk which is used to test laravel application. It uses browser to run the test. Please read <a href="https://laravel.com/docs/5.4/dusk">Dusk</a> before running the tests.
+- Because of server memory limitation this application not able to send or download all tweets if user has more than 500 tweets.
 ## App link
  Click <a href="http://139.59.46.145" target="_blank">here</a>

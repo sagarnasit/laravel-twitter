@@ -41,4 +41,16 @@ function getFollowerTweets(handle){
     });
 
 }
+//Function call to get profile info of searched user
+function getUserInfo(handle, name, profile){
+
+    $.ajax({
+        type:"GET",
+        url:"/loadinfo?handle="+handle+"&name="+name+"&profile="+profile,
+        data:"seach",
+        success:function(data){
+            $('#userinfo').html(data);
+        }
+    });
+}
 //End Ajax

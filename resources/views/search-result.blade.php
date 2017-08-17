@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <title>Search</title>
         @include('layouts.assets')
@@ -38,19 +39,6 @@
             </div>
             <!-- end user info -->
         </div>
-        <!-- ajax script -->
-        <script type="text/javascript">
-        function getUserInfo(handle, name, profile){
-
-            $.ajax({
-                type:"GET",
-                url:"/loadinfo?handle="+handle+"&name="+name+"&profile="+profile,
-                data:"seach",
-                success:function(data){
-                    $('#userinfo').html(data);
-                }
-            });
-        }
-        </script>
+        <script type="text/javascript" src="/js/ajax.js"></script>
     </body>
 </html>

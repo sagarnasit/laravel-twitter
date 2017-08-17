@@ -30,7 +30,7 @@ class TwitterController extends Controller
     {
         $this->validate(request(), ['email' => 'required|email']);
         $tweets= $this->getTweets(Auth::user()->handle, 5);
-        $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
+        $pdf = PDF::loadView('tweets', ['tweets'=>$tweets, 'user' => Auth::user()->handle ]);
         $this->send($tweets, $pdf);
         request()->session()->flash('status', 'Mail Sent');
         return redirect('/home');
@@ -59,7 +59,7 @@ class TwitterController extends Controller
 	 */
     public function download($user)
     {
-          $tweets= $this->getTweets($user, 10);
+          $tweets= $this->getTweets($user, 5);
           $pdf = PDF::loadView('tweets', ['tweets'=>$tweets, 'user' => $user]);
           return $pdf->download();
     }
