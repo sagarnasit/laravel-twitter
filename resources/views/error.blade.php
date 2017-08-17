@@ -62,6 +62,9 @@
                 <div class="title m-b-md">
                     Something went Wrong
                 </div>
+                <div class="title m-b-md" style="font-size:40px;font-weight:bold">
+                    Try After Some Time
+                </div>
 
             </div>
         </div>

@@ -40,7 +40,7 @@
         <div class="text-center" style="margin:1% 0 1% 0">
 
             <!-- Trigger the modal with a button -->
-            <div class="btn-group">
+            <div class="">
                 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Email Me</button>
                 <a href={{ route('download', [ 'user' => Auth::user()->handle ]) }} class="btn btn-primary">Download</a>
             </div>

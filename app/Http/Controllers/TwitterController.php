@@ -37,7 +37,7 @@ class TwitterController extends Controller
     }
     /**
     * this function send pdf attachment of tweets to the email provided by user
-    * @param  $tweets array of tweets
+    * @param  $tweets collection of tweets
     * @param  $pdf contain Html page as PDF
     * @return void
     */
@@ -51,6 +51,12 @@ class TwitterController extends Controller
         return;
     }
 
+    /**
+ 	 * this function download tweets in pdf format.
+ 	 *
+ 	 * @param String $user is twitter handle of user whose tweets will be downloaded
+ 	 * @return force download of generated PDF
+	 */
     public function download($user)
     {
           $tweets= $this->getTweets($user, 10);
@@ -70,7 +76,9 @@ class TwitterController extends Controller
         return redirect('/home');
     }
     /**
-    * this function get tweets from user's timeline (max=500)
+    * this function get tweets from user's timeline
+    * @param $user is twitter handle of user
+    * @param $max integer
     * @return array of tweets
     */
     private function getTweets($user, $max)
@@ -94,10 +102,14 @@ class TwitterController extends Controller
         return $tweets;
     }
 
+    /**
+ 	 *this  function search public user accounts
+ 	 * @return response of search result
+	 */
     public function search()
     {
         $txt=request('searchtext');
-        $searchResult =Twitter::search(['q' => $txt, 'format' => 'array' , 'count' => 5]);
-        return view('search-result', compact(['searchResult']));
+        $searchResult = Twitter::search(['q' => $txt, 'format' => 'array' , 'count' => 5]);
+        return view('search-result', compact(['searchResult', 'txt']));
     }
 }

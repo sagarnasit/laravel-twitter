@@ -1,6 +1,7 @@
+<!-- Display Profile of User -->
 <div class="text-center" style="padding-top:5%">
-    <div class="">
-        <img src="{{ $profile }}" alt="" width="70px">
+    <div class="" align="center">
+        <img src="{{ $profile }}" alt="" width="70px" class="img img-responsive img-circle" >
     </div>
     <div class="" style="padding-top:2%">
         Name: <span>{{ $name}}</span>

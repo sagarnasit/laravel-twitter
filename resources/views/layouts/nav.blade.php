@@ -6,6 +6,24 @@
     font-size: 40px;
     margin-top:-8px;
 }
+.my-input{
+    /*border:1px solid white !important;*/
+    border-radius:3px !important;
+    padding-left:8px !important;
+    background-color:#6bb4e2 !important;
+    color:white !important;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white !important;
+  font-size: 15px !important;
+  margin-left: 8px !important;
+
+}
+.my-btn{
+    padding: 6px;
+    color: white;
+    /*background: #528ae5;*/
+}
 </style>
 
 <!-- Bootstrap navbar -->
@@ -28,15 +46,17 @@
 
                 <li><a href="/home">Home</a></li>
                 <li class=""><a href="" data-toggle="modal" data-target="#myPostTweetModal">Post Tweet</a></li>
-                <li class=""><a href="/search">Search</a></li>
+
 
             </ul>
-            <form class="navbar-form navbar-left" action="/search" method="post">
+
+            <form class="navbar-form navbar-left" action="/search" method="post" >
                 <div class="form-group">
                     {{ csrf_field() }}
-                    <input type="text" name="searchtext"class="form-control" placeholder="Search Public Users">
+                    <input type="text" name="searchtext"class="form-control my-input" placeholder="Search Public Users" required
+                    style="">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" name="button" class="btn btn-primary my-btn">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a >{{ Auth::user()->name }}</a></li>

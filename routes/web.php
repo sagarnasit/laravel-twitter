@@ -95,15 +95,14 @@ Route::group(['middleware'=>['auth']], function () {
         }
     });
 
+    /**
+ 	 * Ajax call for searching public user accounts
+	 */
     Route::get('loadinfo', function(){
         if(Request::ajax()){
             $handle=request('handle');
-            // return $handle;
             $name=request('name');
             $profile=request('profile');
-            // $description=request('description');
-            // return $handle." ".$name. " ".$profile;
-
             return view('ajax.search-profile', compact(['handle', 'name' ,'profile', 'description']));
         }
     });
