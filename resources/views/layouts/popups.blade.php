@@ -73,7 +73,7 @@
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
-                    <textarea  class="form-control" name="tweet" value="" rows="5" placeholder="Write Here........." required style="resize:none"></textarea>
+                    <textarea maxlength="140" class="form-control" name="tweet" value="" rows="5" placeholder="Write Here........." required style="resize:none"></textarea>
 
                 </div>
                 <div class="modal-footer">

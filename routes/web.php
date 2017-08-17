@@ -42,13 +42,18 @@ Route::group(['middleware'=>['auth']], function () {
     /*
      * Download tweets in PDF
      */
-    Route::get('/download', 'TwitterController@download');
+    Route::get('/download/{user}', 'TwitterController@download')->name('download');
 
     /*
      *Post tweet on user's timeline
      */
     Route::post('postTweet', 'TwitterController@postTweet');
 
+    /*
+     *Search public user in twitter
+     */
+
+    Route::post('/search', 'TwitterController@search');
     /*
      * Log out
      */
@@ -87,6 +92,19 @@ Route::group(['middleware'=>['auth']], function () {
                   request()->session()->flash('ajax', $handle);
             //return new slider with 10 tweets of clicked Follower
             return view('ajax.ajax-slider', compact(['tweets']));
+        }
+    });
+
+    Route::get('loadinfo', function(){
+        if(Request::ajax()){
+            $handle=request('handle');
+            // return $handle;
+            $name=request('name');
+            $profile=request('profile');
+            // $description=request('description');
+            // return $handle." ".$name. " ".$profile;
+
+            return view('ajax.search-profile', compact(['handle', 'name' ,'profile', 'description']));
         }
     });
 

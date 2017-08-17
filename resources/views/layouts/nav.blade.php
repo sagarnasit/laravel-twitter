@@ -27,10 +27,17 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="/home">Home</a></li>
-                <li class="active"><a href="" data-toggle="modal" data-target="#myPostTweetModal">Post Tweet</a></li>
+                <li class=""><a href="" data-toggle="modal" data-target="#myPostTweetModal">Post Tweet</a></li>
+                <li class=""><a href="/search">Search</a></li>
 
             </ul>
-
+            <form class="navbar-form navbar-left" action="/search" method="post">
+                <div class="form-group">
+                    {{ csrf_field() }}
+                    <input type="text" name="searchtext"class="form-control" placeholder="Search Public Users">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a >{{ Auth::user()->name }}</a></li>
                 <li class=""><a href="/logout">Logout</a></li>

@@ -29,7 +29,7 @@ class TwitterController extends Controller
     public function sendMail()
     {
         $this->validate(request(), ['email' => 'required|email']);
-        $tweets= $this->getTweets();
+        $tweets= $this->getTweets(Auth::user()->handle, 5);
         $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
         $this->send($tweets, $pdf);
         request()->session()->flash('status', 'Mail Sent');
@@ -51,11 +51,11 @@ class TwitterController extends Controller
         return;
     }
 
-    public function download()
+    public function download($user)
     {
-          $tweets= $this->getTweets();
-          $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
-          return $pdf->download('tweets.pdf');
+          $tweets= $this->getTweets($user, 10);
+          $pdf = PDF::loadView('tweets', ['tweets'=>$tweets, 'user' => $user]);
+          return $pdf->download();
     }
 
     /**
@@ -73,13 +73,13 @@ class TwitterController extends Controller
     * this function get tweets from user's timeline (max=500)
     * @return array of tweets
     */
-    private function getTweets()
+    private function getTweets($user, $max)
     {
         $count=0;//maintain count of number of responses from twitter api
         $tweets=array();//store tweets from every response
         $available=true;//look for the next response
-        while ($available != false && $count!= 5) {
-            $tweet= Twitter::getUserTimeline(['screen_name' => Auth::user()->handle,
+        while ($available != false && $count!= $max) {
+            $tweet= Twitter::getUserTimeline(['screen_name' => $user,
             'page' => $count, 'count'=>100,'format' => 'array']);
             if (empty($tweet)) {
                 $available=false;
@@ -92,5 +92,12 @@ class TwitterController extends Controller
             $count++;
         }
         return $tweets;
+    }
+
+    public function search()
+    {
+        $txt=request('searchtext');
+        $searchResult =Twitter::search(['q' => $txt, 'format' => 'array' , 'count' => 5]);
+        return view('search-result', compact(['searchResult']));
     }
 }

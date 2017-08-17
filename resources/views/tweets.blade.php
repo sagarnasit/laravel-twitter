@@ -13,20 +13,13 @@
 </head>
 <body>
     <div align='center'>
-        <h3>Tweets Form Your Twitter Account</h3>
+        <h3>Tweets Form <strong>@</strong>{{ $user }}</h3>
     </div>
     <!-- twitter logo -->
     <div align='center'>
         <!-- <img src="images/logo.png" alt="" width="150px"> -->
     </div>
 
-    <!-- display name and handle -->
-    <div align='center'>
-        <h5>Name: {{Auth::user()->name}}</h5>
-        <h5 >Handle: <strong>@</strong>{{ Auth::user()->handle}}
-        </h5>
-
-    </div>
     <!-- display each tweets -->
     <div class="">
         @if(!empty($tweets))
