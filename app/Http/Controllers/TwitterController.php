@@ -10,7 +10,7 @@ use PDF;
 use App\Jobs\DownloadTweetsJob;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
-
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterController extends Controller
 {
@@ -68,7 +68,7 @@ class TwitterController extends Controller
         // // dispatch($job);
         // // return "hiii";
         // $count=1;
-        return $tweets= $this->getTweets($user, 15);
+        $tweets= $this->getTweets($user, 15);
         // $html="";
         // foreach ($tweets as $tweet) {
         //     $html.= $tweet . "<br><br>";
@@ -139,4 +139,16 @@ class TwitterController extends Controller
         return view('search-result', compact(['searchResult', 'txt']));
     }
 
+    public function test(){
+        $request_token = [
+            'token'  => session()->get('oauth_request_token'),
+            'secret' => session()->get('oauth_request_token_secret'),
+        ];
+        require '../vendor/autoload.php';
+
+        $connection = new TwitterOAuth(env("TWITTER_CONSUMER_KEY"), env("TWITTER_CONSUMER_SECRET"), $request_token['token'], $request_token['secret']);
+        // $url = $connection->url("oauth/authorize", ["oauth_token" => $request_token['token']]);
+        $t=$connection->get("statuses/home_timeline",['format' => 'array', 'count' => 20, 'screen_name' => 'sagarnasit']);
+        print_r($t);
+    }
 }
