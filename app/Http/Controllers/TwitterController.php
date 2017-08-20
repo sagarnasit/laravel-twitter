@@ -3,11 +3,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Twitter;
 use Auth;
-use Socialite;
 use App\Follower;
 use App\User;
 use Mail;
 use PDF;
+use App\Jobs\DownloadTweetsJob;
+use Carbon\Carbon;
+use Dompdf\Dompdf;
+
+
 class TwitterController extends Controller
 {
     /**
@@ -59,9 +63,28 @@ class TwitterController extends Controller
 	 */
     public function download($user)
     {
-          $tweets= $this->getTweets($user, 5);
-          $pdf = PDF::loadView('tweets', ['tweets'=>$tweets, 'user' => $user]);
-          return $pdf->download();
+
+        // // $job=(new DownloadTweetsJob())->delay(Carbon::now()->addSecond(2));
+        // // dispatch($job);
+        // // return "hiii";
+        // $count=1;
+        return $tweets= $this->getTweets($user, 15);
+        // $html="";
+        // foreach ($tweets as $tweet) {
+        //     $html.= $tweet . "<br><br>";
+        // }
+        //
+        // $dompdf = new Dompdf();
+        // $dompdf->loadHtml($html);
+        // $dompdf->setPaper('A4', 'potrait');
+        //
+        // // Render the HTML as PDF
+        // $dompdf->render();
+        //
+        // // Output the generated PDF to Browser
+        // $dompdf->stream($user);
+          $pdf = PDF::loadView('tweets', ['tweets'=>$tweets]);
+          return $pdf->download("$user.pdf");
     }
 
     /**
@@ -83,23 +106,26 @@ class TwitterController extends Controller
     */
     private function getTweets($user, $max)
     {
+
+
         $count=0;//maintain count of number of responses from twitter api
-        $tweets=array();//store tweets from every response
+        $alltweets=array();//store tweets from every response
         $available=true;//look for the next response
+        $index=0;
         while ($available != false && $count!= $max) {
-            $tweet= Twitter::getUserTimeline(['screen_name' => $user,
-            'page' => $count, 'count'=>100,'format' => 'array']);
-            if (empty($tweet)) {
+            $tweets= Twitter::getUserTimeline(['screen_name' => $user,
+            'page' => $count, 'count'=>200,'format' => 'array', "include_rts"=>true, 'include_entities' => false ]);
+            if (empty($tweets)) {
                 $available=false;
             } else {
                 //store each tweet in array
-                foreach ($tweet as $t) {
-                    array_push($tweets, $t);
+                foreach ($tweets as $t) {
+                    $alltweets[$index++]=$t['text'];
                 }
             }
             $count++;
         }
-        return $tweets;
+        return $alltweets;
     }
 
     /**
@@ -112,4 +138,5 @@ class TwitterController extends Controller
         $searchResult = Twitter::search(['q' => $txt, 'format' => 'array' , 'count' => 5]);
         return view('search-result', compact(['searchResult', 'txt']));
     }
+
 }

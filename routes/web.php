@@ -59,6 +59,7 @@ Route::group(['middleware'=>['auth']], function () {
      */
     Route::get('logout', 'AuthController@logout')->name('twitter.logout');
 
+    Route::get('/test', 'TwitterController@test');
     /*
      *Ajax call for searching Followers
      */
