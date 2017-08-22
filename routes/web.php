@@ -52,7 +52,6 @@ Route::group(['middleware'=>['auth']], function () {
     /*
      *Search public user in twitter
      */
-
     Route::post('/search', 'TwitterController@search');
     /*
      * Log out
@@ -104,7 +103,7 @@ Route::group(['middleware'=>['auth']], function () {
             $handle=request('handle');
             $name=request('name');
             $profile=request('profile');
-            return view('ajax.search-profile', compact(['handle', 'name' ,'profile', 'description']));
+            return view('ajax.search-profile', compact(['handle', 'name' ,'profile']));
         }
     });
 

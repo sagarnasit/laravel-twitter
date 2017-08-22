@@ -106,8 +106,6 @@ class TwitterController extends Controller
     */
     private function getTweets($user, $max)
     {
-
-
         $count=0;//maintain count of number of responses from twitter api
         $alltweets=array();//store tweets from every response
         $available=true;//look for the next response
@@ -138,7 +136,10 @@ class TwitterController extends Controller
         $searchResult = Twitter::search(['q' => $txt, 'format' => 'array' , 'count' => 5]);
         return view('search-result', compact(['searchResult', 'txt']));
     }
-
+    
+    /*
+    *   this function is for testing purpose
+    */
     public function test(){
         $request_token = [
             'token'  => session()->get('oauth_request_token'),
