@@ -1,4 +1,3 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 ## About Application
 
@@ -79,5 +78,3 @@ This is a Laravel Application with expressive, elegant syntax which  allows a us
 - Because of composer installes all the libraries in vendor folder inside root folder, I mention all 3rd party libraries above.
 - Laravel Provide Dusk which is used to test laravel application. It uses browser to run the test. Please read <a href="https://laravel.com/docs/5.4/dusk">Dusk</a> before running the tests.
 - Because of server memory limitation this application not able to send or download all tweets if user has more than 500 tweets.
-## App link
- Click <a href="http://139.59.46.145" target="_blank">here</a>
